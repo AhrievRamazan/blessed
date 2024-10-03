@@ -17,6 +17,9 @@ import redux from '../assets/redux.png';
 import sass from '../assets/sass.png';
 import typescript from '../assets/typescript.png';
 import vue from '../assets/vue.png';
+import AI from '../assets/AI.png';
+import AP from '../assets/AP.png';
+import ID from '../assets/ID.png';
 
 import about01 from '../assets/about01.png';
 import about02 from '../assets/about02.png';
@@ -24,8 +27,10 @@ import about03 from '../assets/about03.png';
 import about04 from '../assets/about04.png';
 
 import profile from '../assets/profile.png';
+import profile2 from '../assets/profile2.png';
 import circle from '../assets/circle.svg';
 import logo from '../assets/logo.png';
+import logo2 from '../assets/logo.svg';
 
 import adidas from '../assets/adidas.png';
 import amazon from '../assets/amazon.png';
@@ -33,6 +38,7 @@ import asus from '../assets/asus.png';
 import bolt from '../assets/bolt.png';
 import nb from '../assets/nb.png';
 import skype from '../assets/skype.png';
+import instagram from '../assets/instagram.jpg';
 import spotify from '../assets/spotify.png';
 
 export default {
@@ -60,13 +66,19 @@ export default {
   about03,
   about04,
   profile,
+  profile2,
   circle,
   logo,
+  logo2,
   adidas,
   amazon,
   asus,
   bolt,
   nb,
   skype,
+  instagram,
   spotify,
+  AI,
+  AP,
+  ID,
 };

@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { About, Footer, Header, Skills, Work, Testimonial } from './container';
+import { Navbar, PdfViewer } from "./components";
+import './App.scss';
 
-import {About, Footer, Header, Skills, Testimonial, Work} from './container'
-import { Navbar } from "./components";
-import './App.scss'
+const App = () => {
+  return (
+    <Router>
+      <div className="app">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} /> {/* Главная страница */}
+          <Route path="/:title" element={<PdfViewer />} /> {/* PDF страницы */}
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
-export const App = () => {
-  return  (
-    <div className="app">
-        <Navbar/>
-        <Header></Header>
-        <About></About>
-        <Work></Work>
-        <Skills></Skills>
-        <Testimonial></Testimonial>
-        <Footer></Footer>
-    </div>
-  )
+// Создадим компонент Home для рендеринга главной страницы
+const Home = () => {
+  useEffect(() => {
+    document.title = "blessed"; // Устанавливаем заголовок на "blessed" при каждом рендере главной страницы
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <About />
+      <Work />
+      <Skills/>
+      <Testimonial/>
+    </>
+  );
 };
 
 export default App;
