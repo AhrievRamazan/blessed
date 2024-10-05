@@ -60,7 +60,7 @@ const Header = () => {
         whileInView={scaleVariants.whileInView}
         className="app__header-circles"
       >
-        {[images.AP, images.ID, images.AI].map((circle, index) => (
+        {[images.AI, images.AP, images.ID ].map((circle, index) => (
           <div className="circle-cmp app__flex" key={`circle-${index}`}>
             <img src= {circle} alt="circle" />
           </div>
@@ -70,4 +70,4 @@ const Header = () => {
   );
 };
 
-export default AppWrap(Header, 'home')
+export default AppWrap(Header, 'Главная')

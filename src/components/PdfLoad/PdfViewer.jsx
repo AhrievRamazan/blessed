@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import { useParams, useNavigate } from 'react-router-dom';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `./pdf.worker.min.mjs`;
+import { GlobalWorkerOptions } from 'pdfjs-dist/webpack';
+
+GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
   const { title } = useParams(); // Получаем название из параметров маршрута
@@ -10,6 +12,7 @@ const PdfViewer = () => {
   const pdfRenderedRef = useRef(false); // Флаг, который проверяет, был ли PDF уже отрендерен
 
   // Извлечение URL PDF из локального хранилища
+
   const pdfUrl = localStorage.getItem(title);
 
   useEffect(() => {
@@ -69,5 +72,6 @@ const PdfViewer = () => {
     </div>
   );
 };
+
 
 export default PdfViewer;

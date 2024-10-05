@@ -25,11 +25,11 @@ const Navbar = () => {
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo">
-        <img src={images.logo2} alt="logo" onClick={() => handleNavigation("home")} />
+        <img src={images.logo2} alt="logo" onClick={() => handleNavigation("Главная")} />
       </div>
 
       <ul className="app__navbar-links">
-        {["home", "about", "work", "skills", "contact"].map((item) => (
+        {["Главная", "Обо мне", "Работы", "Навыки", "Контакты"].map((item) => (
           <li className="app__flex p-text" key={`link-${item}`}>
             <div />
             <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
@@ -47,7 +47,7 @@ const Navbar = () => {
           >
             <HiX onClick={() => setToggle(false)} />
             <ul>
-              {["home", "about", "work", "skills", "contact"].map((item) => (
+              {["Главная", "Обо мне", "Работы", "Навыки", "Контакты"].map((item) => (
                 <li key={item}>
                   <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
                 </li>
