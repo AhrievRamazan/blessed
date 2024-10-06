@@ -28,7 +28,7 @@ const About = () => {
         <br></br> это<span> Хороший бизнес</span>
       </h2>
       <div className="app__profiles">
-        {abouts.map((about, index) => (
+        {abouts.sort((a, b) => a.id - b.id).map((about, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
             whileHover={{ scale: 1.1 }}
@@ -37,7 +37,6 @@ const About = () => {
             key={about.title + index}
           >
             <img src={urlFor(about.imgUrl)} alt={about.title} />
-
             <h2 className="bold-text" style={{ marginTop: 20 }}>
               {about.title}
             </h2>

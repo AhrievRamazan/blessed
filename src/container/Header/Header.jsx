@@ -29,7 +29,7 @@ const Header = () => {
             <span>👋</span>
             <div style={{ marginLeft: 20 }}>
               <p className="p-text">Hello, I am</p>
-              <h1 className="head-text">Islam</h1>
+              <h1>Islam</h1>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ const Header = () => {
         <motion.img
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          src={images.circle}
+          src={images.pattern2}
           alt="profile_circle"
           className="overlay_circle"
         />
