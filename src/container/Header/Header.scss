@@ -190,7 +190,7 @@ h1{
     left: 50%; /* Центрирование по горизонтали */
     transform: translate(-50%, -50%); /* Смещение элемента на 50% влево и вверх, чтобы точно расположить его по центру */
     z-index: 0;
-    width: 120%;
+    width: 100%;
     height: 90%;
     animation: 30s linear 0s normal none infinite running rot;
     -webkit-animation: 30s linear 0s normal none infinite running rot;

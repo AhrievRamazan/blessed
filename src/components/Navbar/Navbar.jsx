@@ -18,6 +18,7 @@ const Navbar = () => {
       const element = document.getElementById(section);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
+        setToggle(false)
       }
     }, 100); // Задержка, чтобы дождаться перезагрузки главной страницы
   };
