@@ -2,6 +2,7 @@
   flex: 1;
   width: 100%;
   flex-direction: column;
+  margin-top: 5rem;
 }
 
 .app__profiles {
@@ -9,32 +10,90 @@
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 3rem;
+  gap: 2vw;
+  max-width: 88.542vw;
+  width: 100%;
 }
 
+.app__profile-item:nth-child(1){
+  background-image: url("../../assets/blobMtk.png");
+}
+
+.app__profile-item:nth-child(3){
+  background-image: url("file:///C:/Users/Ramaz/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/Frame%2022.png");
+}
+
+.app__profile-item:nth-child(4){
+  background-image: url("file:///C:/Users/Ramaz/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/Frame%2018.png");
+}
+
+.app__profile-item:nth-child(5){
+  background-image: url("file:///C:/Users/Ramaz/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/Frame%2020.png");
+}
+.app__profile-item:nth-child(6){
+  background-image: url("file:///C:/Users/Ramaz/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/Frame%2021.png");
+}
+
+
 .app__profile-item {
-  width: 190px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  margin: 2rem;
+  background-image: url("../../assets/blob.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  position: relative;
+  width: 28vw;
+  height: 17vw;
+
+
+
+  &:hover .img-box{
+    filter: grayscale(0);
+    }
+
+  h2 {
+    font-size: 1.5vw;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-family: var(--font-base);
+    color: var(--brown-color);
+  }
+
+  .img-box{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    transition: all 0.5s ease-in-out;
+    // filter: grayscale(1);
+  }
+
+  .content {
+    z-index: 1;
+    width: 9.82vw;
+    height: 2.91vw;
+    border-radius: 5rem;
+    background-color: var(--primary-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 1rem;
+    left: 2rem;
+    p {
+      font-size: 1.1vw;
+      margin: 0 !important;
+      color: var(--black-color);
+    }
+  }
 
   img {
     width: 100%;
-    height: 170px;
-    border-radius: 15px;
-    object-fit: cover;
+    height: 220px;
+    object-fit: contain;
   }
 
 
-
-  @media screen and (min-width: 2000px) {
-    width: 370px;
-    margin: 2rem 4rem;
-
-    img {
-      height: 320px;
-    }
-  }
 }

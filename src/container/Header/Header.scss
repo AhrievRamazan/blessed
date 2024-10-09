@@ -14,7 +14,7 @@
   }
 }
 
-h1{
+h1 {
   font-size: 2.75rem;
   font-weight: 500;
   text-align: center;
@@ -69,6 +69,7 @@ h1{
 }
 
 .app__header-badge {
+  z-index: 9;
   width: 100%;
   align-items: flex-end;
   display: flex;
@@ -171,12 +172,12 @@ h1{
 }
 
 .app__header-img {
+  position: relative;
   flex: 1;
   height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  position: relative;
 
   img {
     width: 100%;
@@ -184,36 +185,40 @@ h1{
     z-index: 1;
   }
 
-  .overlay_circle {
+  .img-box {
     position: absolute;
-    top: 50%; /* Центрирование по вертикали */
-    left: 50%; /* Центрирование по горизонтали */
-    transform: translate(-50%, -50%); /* Смещение элемента на 50% влево и вверх, чтобы точно расположить его по центру */
-    z-index: 0;
-    width: 100%;
-    height: 90%;
-    animation: 30s linear 0s normal none infinite running rot;
-    -webkit-animation: 30s linear 0s normal none infinite running rot;
-    @keyframes rot {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg); /* Добавляем translate для сохранения центрирования при анимации */
+    left: -38%;
+    min-width: 150%;
+    min-height: 100%;
+    overflow: hidden;
+    clip-path: circle(50% at 50% 50%); /* Ограничивает область отображения круга */
+    .overlay_circle {
+      position: absolute;
+      top: 50%;
+      left: 57%;
+      z-index: 0;
+      width: 120%;
+      height: 90%;
+      overflow: hidden;
+      animation: 50s linear 0s normal none infinite running rot;
+
+      @media screen and (max-width: 1200px) {
+        width: 100%;
+
       }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-    
-    @-webkit-keyframes rot {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+
+      @keyframes rot {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg); /* Добавляем translate для сохранения центрирования при анимации */
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
       }
     }
   }
 
   @media screen and (max-width: 1200px) {
-    margin:2rem 0 ;
+    margin: 2rem 0;
   }
 }

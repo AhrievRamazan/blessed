@@ -59,7 +59,6 @@ const Work = () => {
       console.error("No PDF or image URL available!");
     }
   };
-  
 
   // Определение количества отображаемых элементов (если showMore — показываем все, иначе только 2)
   const visibleWorks = showMore ? filterWork : filterWork.slice(0, 8);
@@ -70,11 +69,20 @@ const Work = () => {
         Моё <span>Портфолио</span>
       </h2>
       <div className="app__work-filter">
-        {["Постеры", "Баннеры", "Товарные карточки", "Логотипы", "Визитки", "Все"].map((item, index) => (
+        {[
+          "Постеры",
+          "Баннеры",
+          "Товарные карточки",
+          "Логотипы",
+          "Визитки",
+          "Все",
+        ].map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
-            className={`app__work-filter-item app__flex p-text ${activeFilter === item ? "item-active" : ""}`}
+            className={`app__work-filter-item app__flex p-text ${
+              activeFilter === item ? "item-active" : ""
+            }`}
           >
             {item}
           </div>
@@ -88,7 +96,19 @@ const Work = () => {
       >
         {visibleWorks.map((work, index) => (
           <div className="app__work-item app__flex" key={index}>
-            <div className="app__work-img app__flex">
+            <a
+              className="app__work-img app__flex"
+              href="#"
+              onClick={() =>
+                handleOpenPdfOrImage(
+                  work.pdfFile?.asset?.url,
+                  urlFor(work.imgUrl), // Открываем изображение, если PDF нет
+                  work.title
+                )
+              }
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={urlFor(work.imgUrl)} alt={work.title} />
               <motion.div
                 whileHover={{ opacity: [0, 1] }}
@@ -122,7 +142,7 @@ const Work = () => {
                   </motion.div>
                 </a>
               </motion.div>
-            </div>
+            </a>
 
             <div className="app__work-content app__flex">
               <h4 className="bold-text">{work.title}</h4>
@@ -140,7 +160,10 @@ const Work = () => {
       {/* Кнопка "Показать ещё" появляется только если фильтрованный список длиннее 2 */}
       {filterWork.length > 8 && (
         <div className="app__work-more">
-          <button className="work-button" onClick={() => setShowMore(!showMore)}>
+          <button
+            className="work-button"
+            onClick={() => setShowMore(!showMore)}
+          >
             {showMore ? "Скрыть" : "Показать ещё"}
           </button>
         </div>
@@ -149,4 +172,8 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "Работы", "app__primarybg");
+export default AppWrap(
+  MotionWrap(Work, "app__works"),
+  "Работы",
+  "app__primarybg"
+);

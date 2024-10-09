@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 :root {
   --font-base: "Unbounded", system-ui;
-
+  --font-base-dm: "DM Sans", sans-serif;
   --primary-color: #edf2f8;
   --secondary-color: #92b774;
   --black-color: #030303;

@@ -1,7 +1,7 @@
 import React from "react";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
-import { AppWrap } from '../../wrapper'
+import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
 import "./Header.scss";
 
@@ -46,13 +46,15 @@ const Header = () => {
         className="app__header-img"
       >
         <img src={images.profile2} alt="profile.bg"></img>
-        <motion.img
-          whileInView={{ scale: [0, 1] }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          src={images.pattern2}
-          alt="profile_circle"
-          className="overlay_circle"
-        />
+        <div className="img-box">
+          <motion.img
+            whileInView={{ scale: [0, 1] }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            src={images.pattern2}
+            alt="profile_circle"
+            className="overlay_circle"
+          />
+        </div>
       </motion.div>
 
       <motion.div
@@ -60,9 +62,9 @@ const Header = () => {
         whileInView={scaleVariants.whileInView}
         className="app__header-circles"
       >
-        {[images.AI, images.AP, images.ID ].map((circle, index) => (
+        {[images.AI, images.AP, images.ID].map((circle, index) => (
           <div className="circle-cmp app__flex" key={`circle-${index}`}>
-            <img src= {circle} alt="circle" />
+            <img src={circle} alt="circle" />
           </div>
         ))}
       </motion.div>
@@ -70,4 +72,4 @@ const Header = () => {
   );
 };
 
-export default AppWrap(Header, 'Главная')
+export default AppWrap(Header, "Главная");

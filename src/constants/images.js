@@ -31,6 +31,8 @@ import profile from '../assets/profile.png';
 import profile2 from '../assets/profile2.png';
 import pattern1 from '../assets/pattern1.png';
 import pattern2 from '../assets/pattern2.png';
+import blob from '../assets/blob.png';
+import blobMtk from '../assets/blobMtk.png';
 import circle from '../assets/circle.svg';
 import logo from '../assets/logo.png';
 import logo2 from '../assets/logo.svg';
@@ -46,7 +48,10 @@ import instagram from '../assets/instagram.jpg';
 import spotify from '../assets/spotify.png';
 
 const images = {
+  blobMtk,
+  blob,
   pattern1,
+  pattern2,
   pattern2,
   telegram,
   email,

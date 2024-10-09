@@ -29,10 +29,8 @@
       height: 150px;
     }
   }
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 1200px) {
     width: 100%;
-  }
-  @media screen and (max-width: 600px) {
     flex-direction: column;
     img{
         margin-bottom: 1rem;
@@ -80,6 +78,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+
+    
 
     p{
         font-size: 1.25rem;
