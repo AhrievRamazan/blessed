@@ -37,6 +37,7 @@ import circle from '../assets/circle.svg';
 import logo from '../assets/logo.png';
 import logo2 from '../assets/logo.svg';
 import badievLogo from '../assets/badiev-logo.png';
+import palestine from '../assets/palestine.png';
 
 import adidas from '../assets/adidas.png';
 import amazon from '../assets/amazon.png';
@@ -94,6 +95,7 @@ const images = {
   AI,
   AP,
   ID,
+  palestine,
 };
 
 export default images;

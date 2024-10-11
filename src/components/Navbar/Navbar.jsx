@@ -30,7 +30,7 @@ const Navbar = () => {
       </div>
 
       <ul className="app__navbar-links">
-        {["Главная", "Обо мне", "Работы", "Навыки", "Контакты"].map((item) => (
+        {["Главная", "Услуги", "Работы", "Обо мне", "Контакты"].map((item) => (
           <li className="app__flex p-text" key={`link-${item}`}>
             <div />
             <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
@@ -48,7 +48,7 @@ const Navbar = () => {
           >
             <HiX onClick={() => setToggle(false)} />
             <ul>
-              {["Главная", "Обо мне", "Работы", "Навыки", "Контакты"].map((item) => (
+              {["Главная", "Услуги", "Работы", "Обо мне", "Контакты"].map((item) => (
                 <li key={item}>
                   <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
                 </li>

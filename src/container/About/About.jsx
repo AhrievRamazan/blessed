@@ -37,8 +37,8 @@ const About = () => {
   return (
     <>
       <h2 className="head-text">
-        Я знаю что <span> Хороший дизайн </span>
-        <br /> это<span> Привлечение клиентов</span>
+      Хороший дизайн это  <span> Искусство  </span>
+        <br /> <span> Привлекать клиентов</span>
       </h2>
       <div className="about__me">
         <div className="about__item">
@@ -125,6 +125,6 @@ const About = () => {
 
 export default AppWrap(
   MotionWrap(About, "app__about"),
-  "Обо мне",
+  "Услуги",
   "app__whitebg"
 );

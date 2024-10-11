@@ -35,7 +35,17 @@ const Header = () => {
 
           <div className="tag-cmp app__flex">
             <p className="p-text">Graphic designer</p>
-            <p className="p-text">Freelancer</p>
+            <p
+              className="p-text"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              #freepalestine
+              <img src={images.palestine} style={{ width: 30, height: 30, marginLeft: 10 }} />
+            </p>
           </div>
         </div>
       </motion.div>
