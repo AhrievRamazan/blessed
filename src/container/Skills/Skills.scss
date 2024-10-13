@@ -4,151 +4,208 @@
   flex-direction: column;
 }
 
-
-.app__skills-container {
-  width: 80%;
-  margin-top: 3rem;
+.qualities__container {
   display: flex;
-  flex-direction: row;
-
-  @media screen and (max-width: 900px) {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-.app__skills-list {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-right: 5rem;
-
-  @media screen and (max-width: 900px) {
-    margin-right: 0;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.app__skills-item {
-  flex-direction: column;
-  text-align: center;
-  margin: 1rem;
-  transition: all 0, 3s ease-in-out;
-
-  div {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-color: #fff;
-
-    img {
-      width: 50%;
-      height: 50%;
-    }
-
-    &:hover {
-      box-shadow: 0 0 25px #fef4f5;
-    }
-
-    @media screen and (min-width: 2000px) {
-      width: 150px;
-      height: 150px;
-    }
-  
-  }
-
-  p {
-    font-weight: 500;
-    margin-top: 0.5rem;
-  }
-
-  @media screen and (min-width: 2000px) {
-    margin: 1rem 2rem;
-
-    p {
-      margin-top: 1rem;
-    }
-  }
-}
-
-.app__skills-exp {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-
-  @media screen and (max-width: 900px) {
-    margin-top: 2rem;
-  }
-}
-
-.app__skills-exp-item {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin: 1rem 0;
-}
-
-.app__skills-exp-works {
-  flex: 1;
-
-  .app__skills-exp-work {
+  margin-top: 5rem;
+  .qualities {
+    background-color: var(--primary-color);
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: flex-start;
-    margin-bottom: 1rem;
-    cursor: pointer;
-
-    h4 {
-      font-weight: 500;
+    overflow: hidden;
+    height: calc(100% + 50px);
+    .logo__box {
+      width: 300px;
     }
 
+    .about__me-qualities {
+      margin: 1rem 0;
+    }
+
+    .personal__qualities {
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .expirience {
+      margin-top: 1rem;
+      width: calc(100% + 30px);
+
+      h4 {
+        font-weight: 300;
+        color: var(--brown-color);
+        margin-bottom: 5px;
+      }
+      .expirience__line {
+        position: relative;
+        height: 30px;
+        background-color: var(--secondary-color);
+        div {
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 30px;
+          background-color: var(--brown-color);
+          z-index: 999;
+        }
+      }
+    }
+
+    .expirience:nth-child(2) .expirience__line {
+      div {
+        width: 20%;
+      }
+    }
+    .expirience:nth-child(3) .expirience__line {
+      div {
+        width: 15%;
+      }
+    }
+
+    .expirience:nth-child(5) .expirience__line {
+      div {
+        width: 25%;
+      }
+    }
+  }
+
+  h2 {
+    font-family: var(--font-base-dm);
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--brown-color);
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.about__me {
+  h2 {
+    margin-bottom: 2rem;
+  }
+  padding-top: 1rem;
+  margin-left: 5rem;
+
+  .expirience__parent {
+    margin-top: 3rem;
+  }
+
+  .skills-parent {
+    display: grid;
+    grid-template: 1fr 1fr/1fr 1fr;
+    gap: 30px;
+
+    .skills-logo {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #98c379 75%,
+        /* Зелёная часть */ #5a5a5a 0% /* Серая часть */
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      div {
+        width: 85px;
+        height: 85px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      img{
+        width: 70px;
+        height: 70px;
+      }
+    }
+    .skills-logo:nth-child(3),
+    .skills-logo:nth-child(4) {
+      left: 70px;
+    }
+  }
+}
+
+.learning {
+  margin: 2rem 0;
+}
+.timeline__parent {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+}
+
+.timeline {
+  width: 80%;
+  height: auto;
+  max-width: 800px;
+
+  // Стиль для контента
+  .timeline-content {
+    background: var(--brown-color);
+    box-shadow: 2px 2px 10px var(--brown-color),
+      -2px -2px 10px var(--brown-color);
+    border-radius: 5px;
+    color: white;
+    transition: 0.4s ease;
+    width: 100%;
+    padding: 15px;
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
     p {
-      font-weight: 400;
-      color: var(--gray-color);
-      margin-top: 5px;
+      color: var(--white-color);
+    }
+  }
+
+  // Общий стиль для элементов таймлайна
+  .timeline-component {
+    margin: 0px 20px 20px 20px;
+  }
+
+  .learning__year {
+    margin-top: 1rem;
+  }
+
+  // Таймлайн-миддл (вертикальная линия)
+  .timeline-middle {
+    position: relative;
+    background-color: var(--brown-color);
+    width: 3px;
+    height: 100%;
+    margin-right: 10px;
+    // Круг в середине линии
+    .timeline-circle {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: var(--brown-color);
+      transform: translateX(-50%);
     }
   }
 }
 
-.app__skills-exp-year {
-  margin-right: 3rem;
-
-  p {
-    font-weight: 800;
-    color: var(--secondary-color);
+// Медиа-запрос для устройств с минимальной шириной 768px
+@media screen and (min-width: 768px) {
+  .timeline {
+    display: grid;
+    grid-template-columns: 3px 1fr;
   }
 
-  @media screen and (max-width: 450px) {
-    margin-right: 1rem;
+  // Скрытый элемент, который может использоваться для расширения стилей
+  .main-middle {
+    opacity: 0;
   }
 }
-
-.skills-tooltip {
-    max-width: 300px !important;
-    background-color: var(--white-color) !important;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1) !important;
-    border-radius: 5px !important;
-    padding: 1rem !important;
-    color: var(--gray-color) !important;
-    text-align: center !important;
-    line-height: 1.5 !important;
-    opacity: 1 !important;
-  
-    @media screen and (min-width: 2000px) {
-      font-size: 1.75rem !important;
-      max-width: 500px !important;
-      line-height: 2 !important;
-    }
-  }
-
-  .head-text{
-    font-weight: 600 !important;
-  }

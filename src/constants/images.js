@@ -31,6 +31,7 @@ import profile from '../assets/profile.png';
 import profile2 from '../assets/profile2.png';
 import pattern1 from '../assets/pattern1.png';
 import pattern2 from '../assets/pattern2.png';
+import expLogo from '../assets/exp-logo.png';
 import blob from '../assets/blob.png';
 import blobMtk from '../assets/blobMtk.png';
 import circle from '../assets/circle.svg';
@@ -96,6 +97,7 @@ const images = {
   AP,
   ID,
   palestine,
+  expLogo,
 };
 
 export default images;
