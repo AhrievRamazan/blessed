@@ -47,24 +47,31 @@ const Skills = () => {
 
             <article className="expirience">
               <h4>креативность</h4>
-              <div className="expirience__line">
+              <motion.div 
+              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              transition={{duration:1}}
+              className="expirience__line"
+              >
                 <div></div>
-              </div>
+              </motion.div>
             </article>
 
             <article className="expirience">
               <h4>коммуникабельность</h4>
-              <div className="expirience__line">
+              <motion.div 
+              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              transition={{duration:0.9}}
+              className="expirience__line"
+              >
                 <div></div>
-              </div>
+              </motion.div>
             </article>
 
             <article className="expirience">
               <h4>ответственность</h4>
               <motion.div 
-              whileInView={{ x: [-300, 150, 0], opacity: [0, 0, 1] }}
-              transition={{duration:0.5}}
-
+              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              transition={{duration:0.8}}
               className="expirience__line"
               >
                 <div></div>
@@ -73,9 +80,13 @@ const Skills = () => {
 
             <article className="expirience">
               <h4>умение работать в команде</h4>
-              <div className="expirience__line">
+              <motion.div 
+              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              transition={{duration:0.7}}
+              className="expirience__line"
+              >
                 <div></div>
-              </div>
+              </motion.div>
             </article>
           </div>
         </div>
