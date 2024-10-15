@@ -48,7 +48,7 @@ const Skills = () => {
             <article className="expirience">
               <h4>креативность</h4>
               <motion.div 
-              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
               transition={{duration:1}}
               className="expirience__line"
               >
@@ -59,7 +59,7 @@ const Skills = () => {
             <article className="expirience">
               <h4>коммуникабельность</h4>
               <motion.div 
-              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
               transition={{duration:0.9}}
               className="expirience__line"
               >
@@ -70,7 +70,7 @@ const Skills = () => {
             <article className="expirience">
               <h4>ответственность</h4>
               <motion.div 
-              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
               transition={{duration:0.8}}
               className="expirience__line"
               >
@@ -81,7 +81,7 @@ const Skills = () => {
             <article className="expirience">
               <h4>умение работать в команде</h4>
               <motion.div 
-              whileInView={{ x: [-300, 0], opacity: [0, 0, 1] }}
+              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
               transition={{duration:0.7}}
               className="expirience__line"
               >
@@ -96,7 +96,7 @@ const Skills = () => {
             <article>
               <h2>обо мне</h2>
               <p className="p-text">
-                Мне 20 лет, я дизайнер. <br /> Мои увлечения способствуют
+                Мне 21 год, я дизайнер. <br /> Мои увлечения способствуют
                 развитию креативного мышления. <br /> Я ценю оригинальность и
                 стремлюсь к эстетике, что будет отражено в наших проектах.
                 <br /> Рассматриваю сотрудничество с теми, кто разделяет эти
@@ -114,7 +114,7 @@ const Skills = () => {
                     <div className="timeline-middle">
                       <div className="timeline-circle"></div>
                     </div>
-                    <div style={{ marginLeft: 10 }}>
+                    <div style={{ paddingLeft: 10 }}>
                       <article className="app__flex-row">
                         <h3 className="learning__year">{item.year}</h3>
                         <div className="timeline-component timeline-content">
@@ -131,7 +131,7 @@ const Skills = () => {
           </div>
 
           <div className="expirience__parent">
-            <div className="app__flex-row">
+            <div className="app__flex-row app__flex-column">
               <div>
                 <h2>опыт</h2>
 
@@ -142,7 +142,7 @@ const Skills = () => {
                       <div className="timeline-middle">
                         <div className="timeline-circle"></div>
                       </div>
-                      <div style={{ marginLeft: 10 }}>
+                      <div style={{ paddingLeft: 10 }}>
                         <article className="app__flex-row">
                           <h3 className="learning__year">{item.year}</h3>
                           <div className="timeline-component timeline-content">

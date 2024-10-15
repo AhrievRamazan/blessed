@@ -14,7 +14,14 @@
   gap: 2vw;
   max-width: 88.542vw;
   width: 100%;
+  height: 100%;
+  @media screen and (max-width: 862px) {
+    max-width: 100%;
+    width: 100%;
+  }
+  
 }
+
 
 .app__profile-item {
   background-size: contain;
@@ -24,6 +31,57 @@
   width: 28vw;
   height: 17vw;
   position: relative;
+  background-size: cover;
+  @media screen and (max-width: 862px) {
+    max-width: 250px;
+    width: 100%;
+    height: 150px;
+  }
+
+  .description {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--primary-color);
+    z-index: 999;
+    top: calc(100% - 6px);
+
+    box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, 0.12),
+      /* тень снизу */ 4px 0px 12px 2px rgba(0, 0, 0, 0.12),
+      /* тень справа */ -4px 0px 12px 2px rgba(0, 0, 0, 0.12); /* тень слева */
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    &.active .description {
+      top: 0; // Плавно поднимается, когда элемент активен
+    }
+    .description__title {
+      z-index: 999;
+      margin-top: 2rem;
+      margin-left: 2rem;
+
+      .content {
+        position: static;
+      }
+
+      ul {
+        margin: 3rem 0 3rem 3rem;
+        li::marker {
+          font-size: 1.5rem;
+          color: var(--secondary-color);
+        }
+        li {
+          margin-bottom: 10px;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
   .vissible__hidden {
     overflow: hidden;
     height: 100%;
@@ -100,49 +158,6 @@
       border: none;
       width: 3vw;
       cursor: pointer;
-    }
-  }
-
-  .description {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: var(--primary-color);
-    z-index: 999;
-    top: calc(100% - 6px);
-
-    box-shadow: 
-  0px 4px 12px 2px rgba(0, 0, 0, 0.12),  /* тень снизу */
-  4px 0px 12px 2px rgba(0, 0, 0, 0.12),   /* тень справа */
-  -4px 0px 12px 2px rgba(0, 0, 0, 0.12);  /* тень слева */
-
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-
-    .description__title {
-      margin-top: 2rem;
-      margin-left: 2rem;
-
-      .content {
-        position: static;
-      }
-
-      ul {
-        margin: 3rem 0 3rem 3rem;
-        li::marker {
-          font-size: 1.5rem;
-          color: var(--secondary-color);
-        }
-        li {
-          margin-bottom: 10px;
-        }
-        p {
-          font-size: 1rem;
-        }
-      }
     }
   }
 
