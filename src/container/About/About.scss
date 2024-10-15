@@ -19,9 +19,7 @@
     max-width: 100%;
     width: 100%;
   }
-  
 }
-
 
 .app__profile-item {
   background-size: contain;
@@ -127,6 +125,12 @@
     font-family: var(--font-base);
     color: var(--brown-color);
     text-align: right;
+
+    @media screen and (max-width: 862px) {
+      font-size: 1rem;
+      top: 0;
+      left: 10px;
+    }
   }
 
   .content {
@@ -138,6 +142,9 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    @media screen and (max-width: 862px) {
+      padding: 10px;
+    }
     p,
     button {
       box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.12);
@@ -145,19 +152,29 @@
       justify-content: center;
       align-items: center;
       width: 9.82vw;
-      height: 2.91vw;
+      height: 2.91vh;
       border-radius: 5rem;
       background-color: var(--primary-color);
       font-size: 1.1vw;
       color: var(--black-color);
       z-index: 999;
       margin: 0 !important;
+
+      @media screen and (max-width: 862px) {
+        width: 100px;
+        height: 30px;
+        font-size: 0.8rem;
+      }
     }
 
     button {
       border: none;
       width: 3vw;
       cursor: pointer;
+      @media screen and (max-width: 862px) {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 
