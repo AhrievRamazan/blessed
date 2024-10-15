@@ -116,7 +116,7 @@ const AnimateHeightContent = ({ isActive, about, handleClick }) => {
     >
       <div ref={contentRef}>
         <div className="description__title">
-          <h2>{about.title}</h2>
+          <h2 style={{marginTop: 10}}>{about.title}</h2>
           <ul>
             {about.tags.map((desc, index) => (
               <li key={`${desc.id} - ${index}`}>

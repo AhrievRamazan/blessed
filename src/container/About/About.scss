@@ -59,14 +59,18 @@
     .description__title {
       z-index: 999;
       margin-top: 2rem;
-      margin-left: 2rem;
 
       .content {
         position: static;
       }
 
       ul {
-        margin: 3rem 0 3rem 3rem;
+        margin: 4rem 0 3rem 3rem;
+        padding: 5px 5px 5px 2rem;
+
+        @media screen and (max-width: 862px) {
+         margin-left: 1rem;
+        }
         li::marker {
           font-size: 1.5rem;
           color: var(--secondary-color);
@@ -128,6 +132,9 @@
 
     @media screen and (max-width: 862px) {
       font-size: 1rem;
+    
+    }
+    @media screen and (max-width: 1600px) {
       top: 0;
       left: 10px;
     }
@@ -152,7 +159,7 @@
       justify-content: center;
       align-items: center;
       width: 9.82vw;
-      height: 2.91vh;
+      height: 2.91vw;
       border-radius: 5rem;
       background-color: var(--primary-color);
       font-size: 1.1vw;
