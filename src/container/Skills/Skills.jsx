@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
 import "./Skills.scss";
@@ -9,6 +8,23 @@ const Skills = () => {
   const [experience, setExperience] = useState([]);
   const [skills, setSkills] = useState([]);
   const [learning, setLearning] = useState([]);
+
+  const mySkillsPoint = (point) =>{
+    const points = []
+ 
+    for(let i = 0; i < point; i++){
+      points.push(<div className="circle__shaded"></div>)
+    } 
+
+    if(point < 5){
+      const newPoint = 5 - point
+      for(let i = 0; i < newPoint; i++){
+        points.push(<div className="circle__not-shaded"></div>)
+      }
+    }
+    return points
+    
+  }
 
   useEffect(() => {
     const learningSkill = '*[_type == "learning"]';
@@ -31,150 +47,135 @@ const Skills = () => {
       <h2 className="head-text">
         Обо <span>Мне</span>
       </h2>
-      <div className="qualities__container">
-        <div className="qualities">
-          <div className="logo__box">
-            <img src={images.expLogo} />
-          </div>
 
-          <article className="about__me-qualities">
-            <h2>Ислам бадиев</h2>
+      <div className="about__description">
+        <div className="about__description-name" id="name">
+          <div className="logo">
+            <img src={images.expLogo}></img>
+          </div>
+          <article>
+            <h2 className="underline-pc">Ислам Бадиев</h2>
             <p>графический дизайнер</p>
           </article>
-
-          <div className="personal__qualities">
-            <h2>Личные качества</h2>
-
-            <article className="expirience">
-              <h4>креативность</h4>
-              <motion.div 
-              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
-              transition={{duration:1}}
-              className="expirience__line"
-              >
-                <div></div>
-              </motion.div>
-            </article>
-
-            <article className="expirience">
-              <h4>коммуникабельность</h4>
-              <motion.div 
-              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
-              transition={{duration:0.9}}
-              className="expirience__line"
-              >
-                <div></div>
-              </motion.div>
-            </article>
-
-            <article className="expirience">
-              <h4>ответственность</h4>
-              <motion.div 
-              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
-              transition={{duration:0.8}}
-              className="expirience__line"
-              >
-                <div></div>
-              </motion.div>
-            </article>
-
-            <article className="expirience">
-              <h4>умение работать в команде</h4>
-              <motion.div 
-              whileInView={{ x: [-200, 0], opacity: [0, 0, 1] }}
-              transition={{duration:0.7}}
-              className="expirience__line"
-              >
-                <div></div>
-              </motion.div>
-            </article>
-          </div>
         </div>
 
-        <div className="about__me">
-          <div className="bio">
-            <article>
-              <h2>обо мне</h2>
-              <p className="p-text">
-                Мне 21 год, я дизайнер. <br /> Мои увлечения способствуют
-                развитию креативного мышления. <br /> Я ценю оригинальность и
-                стремлюсь к эстетике, что будет отражено в наших проектах.
-                <br /> Рассматриваю сотрудничество с теми, кто разделяет эти
-                ценности.
-              </p>
+        <div className="about__description-bio underline" id="bio">
+          <article className="about__description-title">
+            <h2 className="bk__square">дорожка</h2>
+            <p>
+              Мне 21 год, и я работаю дизайнером, для которого творчество — это
+              не просто работа, а стиль жизни. Мои увлечения и интересы напрямую
+              способствуют развитию креативного мышления и поиску нестандартных
+              решений. Я ценю оригинальность, постоянно стремлюсь к эстетике и
+              гармонии, которые отражаются в каждом проекте, над которым.
+            </p>
+          </article>
+        </div>
+
+        <div className="about__description-qualities underline" id="qualities">
+          <article>
+            <h2 className="bk__circle">личные качества</h2>
+
+            <article className="about__description-qualities-item">
+              <h3>креативность</h3>
+              <div>
+                <div></div>
+              </div>
             </article>
-          </div>
-          <div className="learning">
-            <h2>Образование</h2>
-            <div className="timeline__parent">
+            <article className="about__description-qualities-item">
+              <h3>коммуникабельность</h3>
+              <div>
+                <div></div>
+              </div>
+            </article>
+            <article className="about__description-qualities-item">
+              <h3>ответственность</h3>
+              <div>
+                <div></div>
+              </div>
+            </article>
+            <article className="about__description-qualities-item">
+              <h3>умение работать в команде</h3>
+              <div>
+                <div></div>
+              </div>
+            </article>
+          </article>
+        </div>
+
+        <div className="about__description-education underline" id="education">
+          <div className="about__description-title">
+            <h2 className="bk__square">образование</h2>
+
+            <div className="education__container">
               {learning
                 .sort((a, b) => a.id - b.id)
                 .map((item, index) => (
-                  <div className="timeline" key={`${item.id} - ${index}`}>
-                    <div className="timeline-middle">
-                      <div className="timeline-circle"></div>
+                  <div className="education__item" key={`${item} - ${index}`}>
+                    <div className="education__item-timeline">
+                      <div></div>
+                      <h2>{item.year}</h2>
                     </div>
-                    <div style={{ paddingLeft: 10 }}>
-                      <article className="app__flex-row">
-                        <h3 className="learning__year">{item.year}</h3>
-                        <div className="timeline-component timeline-content">
-                          <article>
-                            <h3>{item.company}</h3>
-                            <p className="p-text">{item.desc}</p>
-                          </article>
-                        </div>
+
+                    <div className="education__item-content">
+                      <article>
+                        <h2>{item.company}</h2>
+                        <p>{item.desc}</p>
                       </article>
                     </div>
                   </div>
                 ))}
             </div>
           </div>
+        </div>
 
-          <div className="expirience__parent">
-            <div className="app__flex-row app__flex-column">
-              <div>
-                <h2>опыт</h2>
+        <div className="about__description-expirience underline" id="expirience">
+          <div className="about__description-title">
+            <h2 className="bk__square">Опыт</h2>
 
-                {experience
-                  .sort((a, b) => a.id - b.id)
-                  .map((item, index) => (
-                    <div className="timeline" key={`${item.id} - ${index}`}>
-                      <div className="timeline-middle">
-                        <div className="timeline-circle"></div>
-                      </div>
-                      <div style={{ paddingLeft: 10 }}>
-                        <article className="app__flex-row">
-                          <h3 className="learning__year">{item.year}</h3>
-                          <div className="timeline-component timeline-content">
-                            <article>
-                              <h3>{item.company}</h3>
-                              <p className="p-text">{item.desc}</p>
-                            </article>
-                          </div>
-                        </article>
-                      </div>
+            <div className="expirience__container">
+              {experience
+                .sort((a, b) => a.id - b.id)
+                .map((item, index) => (
+                  <div className="expirience__item" key={`${item} - ${index}`}>
+                    <div className="expirience__item-timeline">
+                      <div></div>
+                      <h2>{item.year}</h2>
                     </div>
-                  ))}
-              </div>
 
-              <div className="skills">
-                <h2>Навыки</h2>
-                <div className="skills-parent">
-                  {skills.map((item, index) => (
-                    <div className="skills-logo" key={`${item.id} - ${index}`}>
-                      <motion.div
-                        className="circle-border"
-                 
-                      >
-                        <div className="circle-inner">
-                          <img src={urlFor(item.icon)} alt={item.name} />
-                        </div>
-                      </motion.div>
+                    <div className="expirience__item-content">
+                      <article>
+                        <h2>{item.company}</h2>
+                        <p>{item.desc}</p>
+                      </article>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                ))}
             </div>
+          </div>
+        </div>
+
+        <div className="about__description-skills" id="skills">
+          <div className="skills__container">
+            <h2 className="bk__circle">Навыки</h2>
+            {skills
+              .sort((a, b) => a.id - b.id)
+              .map((item, index) => (
+                <div className="skills__item" key={`${item} - ${index}`}>
+
+                  <div className="img__skills-box">
+                    <img src= {urlFor(item.icon)}></img>
+                  </div>
+                  <article>
+                    <h2>{item.name}</h2>
+                    <p>({item.year})</p>
+                  </article>
+
+                  <div className="skills__circle app__flex-row">
+                  {mySkillsPoint(item.point)}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>
