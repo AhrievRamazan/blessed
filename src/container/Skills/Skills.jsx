@@ -49,7 +49,7 @@ const Skills = () => {
       </h2>
 
       <div className="about__description">
-        <div className="about__description-name" id="name">
+        <div className="about__description-name positon__static" id="name">
           <div className="logo">
             <img src={images.expLogo}></img>
           </div>
@@ -59,7 +59,7 @@ const Skills = () => {
           </article>
         </div>
 
-        <div className="about__description-bio underline" id="bio">
+        <div className="about__description-bio underline positon__static" id="bio">
           <article className="about__description-title">
             <h2 className="bk__square">дорожка</h2>
             <p>
@@ -72,9 +72,9 @@ const Skills = () => {
           </article>
         </div>
 
-        <div className="about__description-qualities underline" id="qualities">
+        <div className="about__description-qualities underline positon__static" id="qualities">
           <article>
-            <h2 className="bk__circle">личные качества</h2>
+            <h2 className="bk__square">личные качества</h2>
 
             <article className="about__description-qualities-item">
               <h3>креативность</h3>
@@ -103,7 +103,7 @@ const Skills = () => {
           </article>
         </div>
 
-        <div className="about__description-education underline" id="education">
+        <div className="about__description-education underline positon__static" id="education">
           <div className="about__description-title">
             <h2 className="bk__square">образование</h2>
 
@@ -129,7 +129,7 @@ const Skills = () => {
           </div>
         </div>
 
-        <div className="about__description-expirience underline" id="expirience">
+        <div className="about__description-expirience underline positon__static" id="expirience">
           <div className="about__description-title">
             <h2 className="bk__square">Опыт</h2>
 
@@ -155,9 +155,9 @@ const Skills = () => {
           </div>
         </div>
 
-        <div className="about__description-skills" id="skills">
+        <div className="about__description-skills positon__static" id="skills">
           <div className="skills__container">
-            <h2 className="bk__circle">Навыки</h2>
+            <h2 className="bk__square">Навыки</h2>
             {skills
               .sort((a, b) => a.id - b.id)
               .map((item, index) => (

@@ -9,6 +9,11 @@
   border-bottom: 3px solid var(--secondary-color);
   padding-bottom: 10px;
 }
+
+.underline{
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 10px;
+}
 .bk__square {
   margin-bottom: 2rem;
   width: 100%;
@@ -21,17 +26,6 @@
   letter-spacing: 0.5px;
 }
 
-.bk__circle {
-  margin-bottom: 2rem;
-  padding: 5px 15px;
-  width: 100%;
-  border-radius: 10px;
-  text-align: center;
-  text-transform: uppercase;
-  background-color: var(--secondary-color);
-  color: var(--white-color);
-  letter-spacing: 0.5px;
-}
 
 .app__skills {
   flex: 1 1;
@@ -39,12 +33,47 @@
   flex-direction: column;
 }
 
+.positon__static {
+  @media screen and (max-width: 1750px) {
+    position: static !important;
+  }
+}
+
 .about__description {
   margin-top: 5rem;
   max-width: 1600px;
   width: 100%;
-  height: 100%;
+  height: 900px;
   position: relative;
+  @media screen and (max-width: 1750px) {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 25px)); /* Каждая колонка занимает минимальную ширину по содержимому */
+    grid-auto-rows: auto; /* Высота строк адаптируется к контенту */
+    gap: 50px; /* Расстояние между элементами */
+    height: auto;
+    justify-content: center;
+      & >div{
+        width: 100% !important;
+      }
+    #name {order: 1;}
+    #bio {order: 2;}
+    #education {order: 6;}
+    #qualities {order: 4;}
+    #skills {order: 3;}
+    #expirience {order: 5;}
+
+  }
+
+  @media screen and (max-width: 1200px){
+    grid-template-columns: 1fr;
+
+    #name {order: 1;}
+    #bio {order: 2;}
+    #education {order: 4;}
+    #qualities {order: 3;}
+    #skills {order: 6;}
+    #expirience {order: 5;}
+  }
   font-family: var(--font-base-dm);
 
   .about__description-name {
@@ -53,35 +82,62 @@
     left: 0;
     display: flex;
     width: 700px;
-    margin-top: 3rem;
+    margin-top: 82px;
     padding: 40px;
     background-color: var(--primary-color);
     border-radius: 30px;
     height: calc(300px - 80px);
+    @media screen and (max-width: 1200px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      padding: 20px;
+      margin-top: 0;
+  }
+
     article {
       margin-left: 2rem;
       width: calc(100% - 340px);
       color: var(--brown-color);
-
+      @media screen and (max-width: 1650px) {
+        width: 80%;
+      }
+      @media screen and (max-width: 1200px) {
+        margin-top: 2rem;
+    }
       h2 {
         font-size: 4rem;
         font-weight: 700;
         text-transform: uppercase;
         line-height: 3.5rem;
         letter-spacing: 4px;
+        @media screen and (max-width: 1650px) {
+          font-size: 3rem;
+        }
+
       }
       p {
         font-size: 1.5rem;
         text-align: justify;
         letter-spacing: 1px;
+        @media screen and (max-width: 1650px) {
+            margin-top: 5px;
+            font-size: 1rem;
+        }
       }
     }
     .logo {
-      margin-top: -80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 300px;
-      img {
-        width: 100%;
-      }
+
+      @media screen and (max-width: 1650px) {
+        width: 180px;
+    }
+ 
+
     }
   }
 
@@ -297,10 +353,15 @@
     position: absolute;
     top: 370px;
     left: 430px;
+    width: 400px;
+
     .skills__container {
-      width: 400px;
-      .bk__circle {
+    .bk__square {
         width: 50%;
+
+        @media screen and (max-width: 1750px) {
+          width: 100%;
+        }
       }
 
       .skills__item {
@@ -315,22 +376,22 @@
             font-size: 1rem;
           }
         }
-      
-        .skills__circle{
+
+        .skills__circle {
           margin-top: 5px;
           margin-left: -15px;
           transform: translate(30px, 0);
-          div{
+          div {
             width: 15px;
             height: 15px;
             border-radius: 100%;
             margin-right: 5px;
           }
 
-          .circle__shaded{
+          .circle__shaded {
             background-color: var(--secondary-color);
           }
-          .circle__not-shaded{
+          .circle__not-shaded {
             border: 1px solid var(--brown-color);
             background-color: transparent;
           }
