@@ -10,9 +10,11 @@
   padding-bottom: 10px;
 }
 
-.underline{
-  border-bottom: 3px solid var(--secondary-color);
-  padding-bottom: 10px;
+.underline {
+  @media screen and (max-width: 900px) {
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 10px;
+  }
 }
 .bk__square {
   margin-bottom: 2rem;
@@ -25,7 +27,6 @@
   color: var(--white-color);
   letter-spacing: 0.5px;
 }
-
 
 .app__skills {
   flex: 1 1;
@@ -47,32 +48,58 @@
   position: relative;
   @media screen and (max-width: 1750px) {
     display: grid;
-    grid-template-columns: repeat(2, calc(50% - 25px)); /* Каждая колонка занимает минимальную ширину по содержимому */
+    grid-template-columns: repeat(
+      2,
+      calc(50% - 25px)
+    ); /* Каждая колонка занимает минимальную ширину по содержимому */
     grid-auto-rows: auto; /* Высота строк адаптируется к контенту */
     gap: 50px; /* Расстояние между элементами */
     height: auto;
     justify-content: center;
-      & >div{
-        width: 100% !important;
-      }
-    #name {order: 1;}
-    #bio {order: 2;}
-    #education {order: 6;}
-    #qualities {order: 4;}
-    #skills {order: 3;}
-    #expirience {order: 5;}
-
+    & > div {
+      width: 100% !important;
+    }
+    #name {
+      order: 1;
+    }
+    #bio {
+      order: 2;
+    }
+    #education {
+      order: 6;
+    }
+    #qualities {
+      order: 4;
+    }
+    #skills {
+      order: 3;
+    }
+    #expirience {
+      order: 5;
+    }
   }
 
-  @media screen and (max-width: 1200px){
+  @media screen and (max-width: 900px) {
     grid-template-columns: 1fr;
 
-    #name {order: 1;}
-    #bio {order: 2;}
-    #education {order: 4;}
-    #qualities {order: 3;}
-    #skills {order: 6;}
-    #expirience {order: 5;}
+    #name {
+      order: 1;
+    }
+    #bio {
+      order: 2;
+    }
+    #education {
+      order: 4;
+    }
+    #qualities {
+      order: 3;
+    }
+    #skills {
+      order: 6;
+    }
+    #expirience {
+      order: 5;
+    }
   }
   font-family: var(--font-base-dm);
 
@@ -94,7 +121,7 @@
       height: auto;
       padding: 20px;
       margin-top: 0;
-  }
+    }
 
     article {
       margin-left: 2rem;
@@ -105,7 +132,7 @@
       }
       @media screen and (max-width: 1200px) {
         margin-top: 2rem;
-    }
+      }
       h2 {
         font-size: 4rem;
         font-weight: 700;
@@ -115,15 +142,14 @@
         @media screen and (max-width: 1650px) {
           font-size: 3rem;
         }
-
       }
       p {
         font-size: 1.5rem;
         text-align: justify;
         letter-spacing: 1px;
         @media screen and (max-width: 1650px) {
-            margin-top: 5px;
-            font-size: 1rem;
+          margin-top: 5px;
+          font-size: 1rem;
         }
       }
     }
@@ -135,9 +161,7 @@
 
       @media screen and (max-width: 1650px) {
         width: 180px;
-    }
- 
-
+      }
     }
   }
 
@@ -356,7 +380,7 @@
     width: 400px;
 
     .skills__container {
-    .bk__square {
+      .bk__square {
         width: 50%;
 
         @media screen and (max-width: 1750px) {

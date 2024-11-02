@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-
 import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
 import "./Header.scss";
@@ -44,7 +43,7 @@ const Header = () => {
               }}
             >
               #freepalestine
-              <img src={images.palestine} style={{ width: 30, height: 30, marginLeft: 10 }} />
+              <img src={images.palestine} style={{ width: 30, height: 30, marginLeft: 10 }} alt="#freepalestine"/>
             </p>
           </div>
         </div>
