@@ -188,7 +188,12 @@ h1 {
 
       @media screen and (max-width: 1200px) {
         width: 100%;
-
+      }
+      @media screen and (max-width: 800px) {
+        animation: none;
+        top: 0;
+        left: 5%;
+        width: 100%;
       }
 
       @keyframes rot {
