@@ -1,22 +1,17 @@
+// PdfViewer.jsx
 import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams, useNavigate } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 import { GlobalWorkerOptions } from 'pdfjs-dist/webpack';
 
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
   const { title } = useParams(); // Получаем название из параметров маршрута
-  const navigate = useNavigate(); // Для редиректа на другие страницы
-  const pdfRenderedRef = useRef(false); // Флаг, который проверяет, был ли PDF уже отрендерен
-
-  // Извлечение URL PDF из локального хранилища
-
-  const pdfUrl = localStorage.getItem(title);
+  const pdfRenderedRef = useRef(false); // Флаг, проверяющий, был ли PDF уже отрендерен
+  const pdfUrl = localStorage.getItem(title); // Извлекаем URL PDF из локального хранилища
 
   useEffect(() => {
-    // Устанавливаем заголовок страницы
     if (title) {
       document.title = decodeURIComponent(title);
     }
@@ -44,24 +39,23 @@ const PdfViewer = () => {
         canvas.width = viewport.width;
         container.appendChild(canvas);
 
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        await page.render({ canvasContext: context, viewport }).promise;
 
+        // Стили для автоматического масштабирования страницы PDF
         canvas.style.width = "100%";
         canvas.style.height = "auto";
       }
     };
 
-    // Проверяем, был ли уже рендеринг
     if (!pdfRenderedRef.current) {
-      pdfRenderedRef.current = true; // Устанавливаем флаг, что рендер уже произошел
+      pdfRenderedRef.current = true;
       renderPdf(pdfUrl);
     }
 
-    // Возвращаем функцию для очистки при размонтировании компонента или обновлении URL
     return () => {
       const container = document.getElementById("pdf-container");
       if (container) {
-        container.innerHTML = ""; // Очищаем контейнер при размонтировании
+        container.innerHTML = "";
       }
     };
   }, [pdfUrl, title]);
@@ -72,6 +66,5 @@ const PdfViewer = () => {
     </div>
   );
 };
-
 
 export default PdfViewer;
