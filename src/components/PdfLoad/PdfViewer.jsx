@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import { useParams } from 'react-router-dom';
 import { GlobalWorkerOptions } from 'pdfjs-dist/webpack';
-
+import './Pdf.scss'
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
