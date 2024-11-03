@@ -1,15 +1,15 @@
 // PdfViewer.jsx
 import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
+import "./Pdf.scss";
 
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
   const { title } = useParams();
-  const { state } = useLocation();
-  const pdfUrl = state?.pdfUrl;
+  const pdfUrl = new URLSearchParams(window.location.search).get("pdfUrl");
   const pdfRenderedRef = useRef(false);
 
   useEffect(() => {
@@ -39,7 +39,6 @@ const PdfViewer = () => {
         container.appendChild(canvas);
 
         await page.render({ canvasContext: context, viewport }).promise;
-        canvas.style.width = "100%";
         canvas.style.height = "auto";
       }
     };

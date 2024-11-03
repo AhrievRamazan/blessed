@@ -29,14 +29,25 @@ const Work = () => {
 
     setTimeout(() => {
       setAnimateCard([{ y: 0, opacity: 1 }]);
-      setFilterWork(item === "Все" ? works : works.filter((work) => work.tags.includes(item)));
+      setFilterWork(
+        item === "Все"
+          ? works
+          : works.filter((work) => work.tags.includes(item))
+      );
     }, 500);
   };
 
-  const handleOpenPdfOrImage = (pdfUrl, imgUrl, title) => {
+  const handleOpenPdfOrImage = (event, pdfUrl, imgUrl, title) => {
+    event.preventDefault(); // предотвращаем стандартное поведение
+
     if (pdfUrl) {
-      navigate(`/${encodeURIComponent(title)}`, { state: { pdfUrl } });
+      // Открываем PdfViewer в новой вкладке с использованием полного URL
+      window.open(
+        `/${encodeURIComponent(title)}?pdfUrl=${encodeURIComponent(pdfUrl)}`,
+        "_blank"
+      );
     } else if (imgUrl) {
+      // Открываем изображение в новой вкладке
       window.open(imgUrl, "_blank");
     } else {
       console.error("No PDF or image URL available!");
@@ -51,40 +62,72 @@ const Work = () => {
         Моё <span>Портфолио</span>
       </h2>
       <div className="app__work-filter">
-        {["Постеры", "Баннеры", "Товарные карточки", "Логотипы", "Визитки", "Все"].map((item, index) => (
+        {[
+          "Постеры",
+          "Баннеры",
+          "Товарные карточки",
+          "Логотипы",
+          "Визитки",
+          "Все",
+        ].map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
-            className={`app__work-filter-item app__flex p-text ${activeFilter === item ? "item-active" : ""}`}
+            className={`app__work-filter-item app__flex p-text ${
+              activeFilter === item ? "item-active" : ""
+            }`}
           >
             {item}
           </div>
         ))}
       </div>
 
-      <motion.div animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.4 }} className="app__work-portfolio">
+      <motion.div
+        animate={animateCard}
+        transition={{ duration: 0.5, delayChildren: 0.4 }}
+        className="app__work-portfolio"
+      >
         {visibleWorks.map((work, index) => (
           <div className="app__work-item app__flex" key={index}>
             <a
               className="app__work-img app__flex"
               href="#"
-              onClick={() => handleOpenPdfOrImage(work.pdfFile?.asset?.url, urlFor(work.imgUrl), work.title)}
+              onClick={(event) =>
+                handleOpenPdfOrImage(
+                  event,
+                  work.pdfFile?.asset?.url,
+                  urlFor(work.imgUrl),
+                  work.title
+                )
+              }
             >
               <img src={urlFor(work.imgUrl)} alt={work.title} />
               <motion.div
                 whileHover={{ opacity: [0, 1] }}
                 initial={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: "easeInOut", staggerChildren: 0.5 }}
+                transition={{
+                  duration: 0.25,
+                  ease: "easeInOut",
+                  staggerChildren: 0.5,
+                }}
                 className="app__work-hover app__flex"
               >
-                <motion.div whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.9] }} transition={{ duration: 0.25 }} className="app__flex">
+                <motion.div
+                  whileInView={{ scale: [0, 1] }}
+                  whileHover={{ scale: [1, 0.9] }}
+                  transition={{ duration: 0.25 }}
+                  className="app__flex"
+                >
                   <AiFillEye />
                 </motion.div>
               </motion.div>
             </a>
+
             <div className="app__work-content app__flex">
               <h4 className="bold-text">{work.title}</h4>
-              <p className="p-text" style={{ marginTop: 10 }}>{work.description}</p>
+              <p className="p-text" style={{ marginTop: 10 }}>
+                {work.description}
+              </p>
               <div className="app__work-tag app__flex">
                 <p className="p-text">{work.tags[0]}</p>
               </div>
@@ -95,7 +138,10 @@ const Work = () => {
 
       {filterWork.length > 8 && (
         <div className="app__work-more">
-          <button className="work-button" onClick={() => setShowMore(!showMore)}>
+          <button
+            className="work-button"
+            onClick={() => setShowMore(!showMore)}
+          >
             {showMore ? "Скрыть" : "Показать ещё"}
           </button>
         </div>
@@ -104,4 +150,8 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "Работы", "app__primarybg");
+export default AppWrap(
+  MotionWrap(Work, "app__works"),
+  "Работы",
+  "app__primarybg"
+);
