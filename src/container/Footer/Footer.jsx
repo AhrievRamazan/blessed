@@ -58,7 +58,7 @@ const Footer = () => {
             className="p-text"
             type="text "
             name="name"
-            placeholder="Имя"
+            placeholder="Ваше имя"
           ></input>
         </div>
         <div className="app__flex">
@@ -66,7 +66,7 @@ const Footer = () => {
             className="p-text"
             type="email "
             name="email"
-            placeholder="почта"
+            placeholder="Ваша почта"
           ></input>
         </div>
         <div>
@@ -83,6 +83,10 @@ const Footer = () => {
             name="message"
           />
         </div>
+            <div className="">
+
+            </div>
+        
       </div>
     </>
   );

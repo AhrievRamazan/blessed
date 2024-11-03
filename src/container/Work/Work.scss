@@ -78,12 +78,19 @@
 }
 
 .app__work-img {
+    border: none;
+    cursor: pointer;
     background: #e1e1e1;
     z-index: 998;
     border-radius: 0.5rem;
     width: 100%;
     height: 230px;
     position: relative;
+
+    button{
+        background: none;
+        border: none;
+    }
 
     img {
         width: 100%;

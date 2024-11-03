@@ -51,7 +51,7 @@ const Skills = () => {
       <div className="about__description">
         <div className="about__description-name positon__static" id="name">
           <div className="logo">
-            <img src={images.expLogo}></img>
+            <img src={images.expLogo} alt="exp-logo"></img>
           </div>
           <article>
             <h2 className="underline-pc">Ислам Бадиев</h2>
@@ -164,7 +164,7 @@ const Skills = () => {
                 <div className="skills__item" key={`${item} - ${index}`}>
 
                   <div className="img__skills-box">
-                    <img src= {urlFor(item.icon)}></img>
+                    <img src= {urlFor(item.icon)} alt="item-icon"></img>
                   </div>
                   <article>
                     <h2>{item.name}</h2>

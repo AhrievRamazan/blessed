@@ -8,11 +8,16 @@ import { urlFor, client } from "../../client";
 const About = () => {
   const [abouts, setAbouts] = useState([]); // Храним данные об элементах
   const [activeIndex, setActiveIndex] = useState(null); // Храним индекс активного элемента
-
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   // Функция для обработки клика, принимает индекс элемента
   const handleClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index); // Переключение активного индекса
   };
+
+  const updateScreenWidth = () => {
+    setScreenWidth(window.innerWidth); // Обновляем ширину экрана
+  };
+
 
   const formatTitle = (title) => {
     const words = title.split(" ");
@@ -31,6 +36,14 @@ const About = () => {
     const query = '*[_type == "abouts"]'; // Запрос на получение данных
 
     client.fetch(query).then((data) => setAbouts(data)); // Устанавливаем данные в состояние
+
+    window.addEventListener("resize", updateScreenWidth);
+
+    // Убираем слушатель при размонтировании компонента
+    return () => {
+      window.removeEventListener("resize", updateScreenWidth);
+    };
+    
   }, []);
 
   return (
@@ -50,8 +63,11 @@ const About = () => {
             <motion.div
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, type: "tween" }}
+              
               whileHover={{
-                scale: activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1,
+                scale: screenWidth > 768 
+                  ? activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1 
+                : 1,
               }}
               className="app__profile-item"
               style={{ backgroundImage: `url(${urlFor(about.imgUrl)})` }}
@@ -67,7 +83,7 @@ const About = () => {
                 {/* Проверяем, является ли текущий элемент активным */}
                 <div
                   style={{
-                    visibility: activeIndex === index ? "hidden" : "visible",
+                    visibility:  activeIndex === index ? "hidden" : "visible",
                   }}
                 >
                   <h2 className="bold-text" style={{ marginTop: 20 }}>
@@ -91,6 +107,7 @@ const About = () => {
                 isActive={activeIndex === index}
                 about={about}
                 handleClick={() => handleClick(index)}
+                screenWidth={screenWidth}
               />
             </motion.div>
           ))}
@@ -100,19 +117,19 @@ const About = () => {
 };
 
 // Компонент с анимацией высоты
-const AnimateHeightContent = ({ isActive, about, handleClick }) => {
+const AnimateHeightContent = ({ isActive, about, handleClick, screenWidth }) => {
   const contentRef = useRef(null);
 
   return (
     <motion.div
       className="description"
       initial={false} // Анимация только на изменение
-      animate={{
+      animate=  {{
         height: isActive ? contentRef.current?.scrollHeight : 0,
         opacity: isActive ? 1 : 0,
       }}
-      transition={{ duration: 0.8, ease: "easeInOut" }} // Длительность анимации
-      style={{ overflow: "hidden" }} // Скрываем контент, когда он закрыт
+      transition=  {{  duration: screenWidth > 768 ? 0.8 : 0, ease: "easeInOut" }} // Длительность анимации
+      style={{ overflow: "hidden",}} // Скрываем контент, когда он закрыт
     >
       <div ref={contentRef}>
         <div className="description__title">
