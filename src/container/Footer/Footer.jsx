@@ -4,7 +4,6 @@ import { images } from "../../constants";
 import "./Footer.scss";
 
 const Footer = () => {
-
   return (
     <>
       <h2 className="head-text">
@@ -71,7 +70,15 @@ const Footer = () => {
         </div>
         <div>
           <select className="p-text">
-            {['Выберите один','Логотип','Фирменный стиль','Товарные карточки','Визитки','Постеры','Баннеры'].map((item, index) => (
+            {[
+              "Выберите один",
+              "Логотип",
+              "Фирменный стиль",
+              "Товарные карточки",
+              "Визитки",
+              "Постеры",
+              "Баннеры",
+            ].map((item, index) => (
               <option key={`${item} + ${index}`}>{item}</option>
             ))}
           </select>
@@ -83,10 +90,11 @@ const Footer = () => {
             name="message"
           />
         </div>
-            <div className="">
-
-            </div>
-        
+        <div className="submit__button">
+          <div className="order">
+            <div className="truck"></div>
+          </div>
+        </div>
       </div>
     </>
   );

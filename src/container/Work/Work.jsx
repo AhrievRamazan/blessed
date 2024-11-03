@@ -96,16 +96,18 @@ const Work = () => {
       >
         {visibleWorks.map((work, index) => (
           <div className="app__work-item app__flex" key={index}>
-            <button
+            <a
               className="app__work-img app__flex"
-              onClick={(e) => {
-                e.preventDefault();
+              href="#"
+              onClick={() =>
                 handleOpenPdfOrImage(
                   work.pdfFile?.asset?.url,
                   urlFor(work.imgUrl), // Открываем изображение, если PDF нет
                   work.title
-                );
-              }}
+                )
+              }
+              target="_blank"
+              rel="noreferrer"
             >
               <img src={urlFor(work.imgUrl)} alt={work.title} />
               <motion.div
@@ -118,7 +120,8 @@ const Work = () => {
                 }}
                 className="app__work-hover app__flex"
               >
-                <button
+                <a
+                  href="#"
                   onClick={() =>
                     handleOpenPdfOrImage(
                       work.pdfFile?.asset?.url,
@@ -126,7 +129,8 @@ const Work = () => {
                       work.title
                     )
                   }
-          
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <motion.div
                     whileInView={{ scale: [0, 1] }}
@@ -136,9 +140,9 @@ const Work = () => {
                   >
                     <AiFillEye />
                   </motion.div>
-                </button>
+                </a>
               </motion.div>
-            </button>
+            </a>
 
             <div className="app__work-content app__flex">
               <h4 className="bold-text">{work.title}</h4>
