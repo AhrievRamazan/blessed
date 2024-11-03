@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
@@ -36,25 +37,13 @@ const Work = () => {
   };
 
   // Функция для открытия PDF или изображения в новой вкладке
+  const navigate = useNavigate();
+
   const handleOpenPdfOrImage = (pdfUrl, imgUrl, title) => {
     if (pdfUrl) {
-      try {
-        // Сохраняем URL PDF в локальное хранилище
-        localStorage.setItem(title, pdfUrl);
-        // Открываем PDF в новой вкладке
-        const newTab = window.open(`/${encodeURIComponent(title)}`, "_blank");
-        if (!newTab) {
-          console.error("Failed to open new tab (popup might be blocked).");
-        }
-      } catch (error) {
-        console.error("Error saving PDF URL or opening new tab:", error);
-      }
+      navigate(`/${encodeURIComponent(title)}`, { state: { pdfUrl } });
     } else if (imgUrl) {
-      // Если нет PDF, открываем изображение
-      const newTab = window.open(imgUrl, "_blank");
-      if (!newTab) {
-        console.error("Failed to open new tab (popup might be blocked).");
-      }
+      window.open(imgUrl, "_blank");
     } else {
       console.error("No PDF or image URL available!");
     }

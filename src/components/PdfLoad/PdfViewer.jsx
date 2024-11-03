@@ -1,15 +1,15 @@
-// PdfViewer.jsx
 import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams } from 'react-router-dom';
-import { GlobalWorkerOptions } from 'pdfjs-dist/webpack';
-import './Pdf.scss'
+import { useParams, useLocation } from "react-router-dom";
+import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
+
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
-  const { title } = useParams(); // Получаем название из параметров маршрута
-  const pdfRenderedRef = useRef(false); // Флаг, проверяющий, был ли PDF уже отрендерен
-  const pdfUrl = localStorage.getItem(title); // Извлекаем URL PDF из локального хранилища
+  const { title } = useParams();
+  const location = useLocation(); // Доступ к `state`
+  const pdfRenderedRef = useRef(false);
+  const pdfUrl = location.state?.pdfUrl; // Получаем PDF URL из `state`
 
   useEffect(() => {
     if (title) {
@@ -41,7 +41,6 @@ const PdfViewer = () => {
 
         await page.render({ canvasContext: context, viewport }).promise;
 
-        // Стили для автоматического масштабирования страницы PDF
         canvas.style.width = "100%";
         canvas.style.height = "auto";
       }
