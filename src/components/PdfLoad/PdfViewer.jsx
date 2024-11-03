@@ -1,20 +1,19 @@
+// PdfViewer.jsx
 import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
 
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
   const { title } = useParams();
-  const location = useLocation(); // Доступ к `state`
+  const { state } = useLocation();
+  const pdfUrl = state?.pdfUrl;
   const pdfRenderedRef = useRef(false);
-  const pdfUrl = location.state?.pdfUrl; // Получаем PDF URL из `state`
 
   useEffect(() => {
-    if (title) {
-      document.title = decodeURIComponent(title);
-    }
+    document.title = decodeURIComponent(title);
 
     const renderPdf = async (url) => {
       if (!url) {
@@ -40,7 +39,6 @@ const PdfViewer = () => {
         container.appendChild(canvas);
 
         await page.render({ canvasContext: context, viewport }).promise;
-
         canvas.style.width = "100%";
         canvas.style.height = "auto";
       }
@@ -53,17 +51,11 @@ const PdfViewer = () => {
 
     return () => {
       const container = document.getElementById("pdf-container");
-      if (container) {
-        container.innerHTML = "";
-      }
+      if (container) container.innerHTML = "";
     };
   }, [pdfUrl, title]);
 
-  return (
-    <div className="pdf-viewer">
-      <div id="pdf-container" className="pdf-container"></div>
-    </div>
-  );
+  return <div id="pdf-container" className="pdf-container"></div>;
 };
 
 export default PdfViewer;
