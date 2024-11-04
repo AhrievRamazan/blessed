@@ -13,42 +13,52 @@ const PdfViewer = () => {
   const pdfUrl = state?.pdfUrl;
 
   useEffect(() => {
-    const renderPdf = async (url) => {
+    const renderFirstPage = async (url) => {
       if (!url) {
         console.error("PDF URL is missing!");
         return;
       }
 
       try {
+        // Загружаем документ PDF
         const loadingTask = pdfjsLib.getDocument(url);
         const pdf = await loadingTask.promise;
-        const numPages = pdf.numPages;
+
+        // Получаем первую страницу PDF
+        const page = await pdf.getPage(1);
+        const viewport = page.getViewport({ scale: 1.5 });
+        
+        // Создаем canvas для рендеринга
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        
+        // Добавляем canvas в контейнер
         const container = document.getElementById("pdf-container");
-        container.innerHTML = "";
+        container.innerHTML = ""; // очищаем контейнер
+        container.appendChild(canvas);
 
-        for (let i = 1; i <= numPages; i++) {
-          const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 1.5 });
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          container.appendChild(canvas);
-
-          await page.render({ canvasContext: context, viewport }).promise;
-          canvas.style.width = "100%";
-          canvas.style.height = "auto";
-        }
+        // Рендерим страницу на canvas
+        await page.render({ canvasContext: context, viewport }).promise;
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
+        
       } catch (error) {
         console.error("Error rendering PDF:", error);
       }
     };
 
-    renderPdf(pdfUrl);
+    renderFirstPage(pdfUrl);
   }, [pdfUrl]);
 
-  return <div id="pdf-container" className="pdf-container"></div>;
+  return (
+    <div id="pdf-container" className="pdf-container">
+      {/* Если PDF не отображается, можно добавить текстовый индикатор */}
+      {pdfUrl ? null : <p>PDF не найден. Пожалуйста, проверьте URL.</p>}
+    </div>
+  );
 };
 
 export default PdfViewer;
