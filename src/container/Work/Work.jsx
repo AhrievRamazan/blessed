@@ -32,15 +32,19 @@ const Work = () => {
     }, 500);
   };
 
+
   const handleOpenPdfOrImage = (pdfUrl, imgUrl, title) => {
     if (pdfUrl) {
-      navigate(`/pdf-viewer/${encodeURIComponent(pdfUrl)}`);
+      console.log("Navigating to PDF:", pdfUrl); // Логируем URL перед навигацией
+      navigate(`/${encodeURIComponent(title)}`, { state: { pdfUrl } });
     } else if (imgUrl) {
       window.open(imgUrl, "_blank");
     } else {
       console.error("No PDF or image URL available!");
     }
   };
+  
+  
   
 
   const visibleWorks = showMore ? filterWork : filterWork.slice(0, 8);

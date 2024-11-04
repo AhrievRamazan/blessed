@@ -11,8 +11,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} /> {/* Главная страница */}
-          <Route path="/pdf-viewer/:pdfUrl" element={<PdfViewer />} />
-
+          <Route path="/:title" element={<PdfViewer />} /> {/* PDF страницы */}
         </Routes>
         <Footer />
       </div>
