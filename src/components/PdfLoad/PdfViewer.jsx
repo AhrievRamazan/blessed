@@ -21,8 +21,15 @@ const PdfViewer = () => {
       try {
         const loadingTask = pdfjsLib.getDocument(url);
         const pdf = await loadingTask.promise;
+        
+        // Проверка количества страниц для диагностики
+        if (pdf.numPages < 1) {
+          console.error("PDF не содержит страниц.");
+          return;
+        }
+
         const page = await pdf.getPage(1);
-        const viewport = page.getViewport({ scale: 1.5 });
+        const viewport = page.getViewport({ scale: window.innerWidth < 768 ? 1 : 1.5 }); // Масштабируем для мобильных устройств
 
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
@@ -40,6 +47,8 @@ const PdfViewer = () => {
 
       } catch (error) {
         console.error("Error rendering PDF:", error);
+        const container = document.getElementById("pdf-container");
+        container.innerHTML = "<p>Не удалось загрузить PDF. Пожалуйста, проверьте URL или попробуйте позже.</p>";
       }
     };
 
