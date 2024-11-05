@@ -1,7 +1,7 @@
 // PdfViewer.jsx
 import React, { useEffect, useRef } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
 import "./Pdf.scss";
 
@@ -10,42 +10,39 @@ GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs
 const PdfViewer = () => {
   const { title } = useParams();
   const pdfUrl = new URLSearchParams(window.location.search).get("pdfUrl");
-  const pdfRenderedRef = useRef(false);
 
   useEffect(() => {
-    document.title = decodeURIComponent(title);
-
     const renderPdf = async (url) => {
-      if (!url) {
-        console.error("PDF URL is missing!");
-        return;
-      }
+      try {
+        const loadingTask = pdfjsLib.getDocument(url);
+        const pdf = await loadingTask.promise;
+        const numPages = pdf.numPages;
 
-      const loadingTask = pdfjsLib.getDocument(url);
-      const pdf = await loadingTask.promise;
-      const numPages = pdf.numPages;
+        const container = document.getElementById("pdf-container");
+        container.innerHTML = "";
 
-      const container = document.getElementById("pdf-container");
-      container.innerHTML = "";
+        for (let i = 1; i <= numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
 
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          container.appendChild(canvas);
 
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        container.appendChild(canvas);
-
-        await page.render({ canvasContext: context, viewport }).promise;
-        canvas.style.height = "auto";
+          await page.render({ canvasContext: context, viewport }).promise;
+          console.log(`Page ${i} rendered successfully.`);
+        }
+      } catch (error) {
+        console.error("Error rendering PDF:", error);
       }
     };
 
-    if (!pdfRenderedRef.current) {
-      pdfRenderedRef.current = true;
+    if (pdfUrl) {
       renderPdf(pdfUrl);
+    } else {
+      console.error("PDF URL is missing!");
     }
 
     return () => {

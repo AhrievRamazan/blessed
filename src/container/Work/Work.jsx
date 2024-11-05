@@ -37,17 +37,10 @@ const Work = () => {
     }, 500);
   };
 
-  const handleOpenPdfOrImage = (event, pdfUrl, imgUrl, title) => {
-    event.preventDefault(); // предотвращаем стандартное поведение
-
+  const handleOpenPdfOrImage = (pdfUrl, imgUrl, title) => {
     if (pdfUrl) {
-      // Открываем PdfViewer в новой вкладке с использованием полного URL
-      window.open(
-        `/${encodeURIComponent(title)}?pdfUrl=${encodeURIComponent(pdfUrl)}`,
-        "_blank"
-      );
+      navigate(`/${encodeURIComponent(title)}?pdfUrl=${encodeURIComponent(pdfUrl)}`);
     } else if (imgUrl) {
-      // Открываем изображение в новой вкладке
       window.open(imgUrl, "_blank");
     } else {
       console.error("No PDF or image URL available!");
@@ -62,20 +55,11 @@ const Work = () => {
         Моё <span>Портфолио</span>
       </h2>
       <div className="app__work-filter">
-        {[
-          "Постеры",
-          "Баннеры",
-          "Товарные карточки",
-          "Логотипы",
-          "Визитки",
-          "Все",
-        ].map((item, index) => (
+        {["Постеры", "Баннеры", "Товарные карточки", "Логотипы", "Визитки", "Все"].map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
-            className={`app__work-filter-item app__flex p-text ${
-              activeFilter === item ? "item-active" : ""
-            }`}
+            className={`app__work-filter-item app__flex p-text ${activeFilter === item ? "item-active" : ""}`}
           >
             {item}
           </div>
@@ -92,14 +76,10 @@ const Work = () => {
             <a
               className="app__work-img app__flex"
               href="#"
-              onClick={(event) =>
-                handleOpenPdfOrImage(
-                  event,
-                  work.pdfFile?.asset?.url,
-                  urlFor(work.imgUrl),
-                  work.title
-                )
-              }
+              onClick={(event) => {
+                event.preventDefault();
+                handleOpenPdfOrImage(work.pdfFile?.asset?.url, urlFor(work.imgUrl), work.title);
+              }}
             >
               <img src={urlFor(work.imgUrl)} alt={work.title} />
               <motion.div
@@ -138,10 +118,7 @@ const Work = () => {
 
       {filterWork.length > 8 && (
         <div className="app__work-more">
-          <button
-            className="work-button"
-            onClick={() => setShowMore(!showMore)}
-          >
+          <button className="work-button" onClick={() => setShowMore(!showMore)}>
             {showMore ? "Скрыть" : "Показать ещё"}
           </button>
         </div>
@@ -150,8 +127,4 @@ const Work = () => {
   );
 };
 
-export default AppWrap(
-  MotionWrap(Work, "app__works"),
-  "Работы",
-  "app__primarybg"
-);
+export default AppWrap(MotionWrap(Work, "app__works"), "Работы", "app__primarybg");
