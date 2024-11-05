@@ -1,5 +1,5 @@
 // PdfViewer.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import { useParams } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
@@ -11,6 +11,7 @@ const PdfViewer = () => {
   const { title } = useParams();
   const pdfUrl = new URLSearchParams(window.location.search).get("pdfUrl");
   const pdfRenderedRef = useRef(false);
+  const [images, setImages] = useState([]); // Хранит URL изображений страниц
 
   useEffect(() => {
     document.title = decodeURIComponent(title);
@@ -29,6 +30,8 @@ const PdfViewer = () => {
 
       console.log(`PDF loaded. Total pages: ${numPages}`);
 
+      const pageImages = []; // Массив для хранения изображений страниц
+
       for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);
         const viewport = page.getViewport({ scale: 1.5 });
@@ -37,13 +40,15 @@ const PdfViewer = () => {
 
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        container.appendChild(canvas);
 
-        console.log(`Rendering page ${i}`);
         await page.render({ canvasContext: context, viewport }).promise;
-        console.log(`Page ${i} rendered`);
-        canvas.style.height = "auto";
+
+        // Получаем изображение из canvas
+        const imgDataUrl = canvas.toDataURL();
+        pageImages.push(imgDataUrl); // Добавляем URL изображения в массив
       }
+
+      setImages(pageImages); // Сохраняем изображения в состоянии
     };
 
     if (!pdfRenderedRef.current) {
@@ -57,7 +62,13 @@ const PdfViewer = () => {
     };
   }, [pdfUrl, title]);
 
-  return <div id="pdf-container" className="pdf-container"></div>;
+  return (
+    <div id="pdf-container" className="pdf-container">
+      {images.map((imgSrc, index) => (
+        <img key={index} src={imgSrc} alt={`Page ${index + 1}`} />
+      ))}
+    </div>
+  );
 };
 
 export default PdfViewer;
