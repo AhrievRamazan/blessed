@@ -10,39 +10,45 @@ GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs
 const PdfViewer = () => {
   const { title } = useParams();
   const pdfUrl = new URLSearchParams(window.location.search).get("pdfUrl");
+  const pdfRenderedRef = useRef(false);
 
   useEffect(() => {
+    document.title = decodeURIComponent(title);
+
     const renderPdf = async (url) => {
-      try {
-        const loadingTask = pdfjsLib.getDocument(url);
-        const pdf = await loadingTask.promise;
-        const numPages = pdf.numPages;
+      if (!url) {
+        console.error("PDF URL is missing!");
+        return;
+      }
 
-        const container = document.getElementById("pdf-container");
-        container.innerHTML = "";
+      const loadingTask = pdfjsLib.getDocument(url);
+      const pdf = await loadingTask.promise;
+      const numPages = pdf.numPages;
+      const container = document.getElementById("pdf-container");
+      container.innerHTML = "";
 
-        for (let i = 1; i <= numPages; i++) {
-          const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 1.5 });
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
+      console.log(`PDF loaded. Total pages: ${numPages}`);
 
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          container.appendChild(canvas);
+      for (let i = 1; i <= numPages; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 });
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
 
-          await page.render({ canvasContext: context, viewport }).promise;
-          console.log(`Page ${i} rendered successfully.`);
-        }
-      } catch (error) {
-        console.error("Error rendering PDF:", error);
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        container.appendChild(canvas);
+
+        console.log(`Rendering page ${i}`);
+        await page.render({ canvasContext: context, viewport }).promise;
+        console.log(`Page ${i} rendered`);
+        canvas.style.height = "auto";
       }
     };
 
-    if (pdfUrl) {
+    if (!pdfRenderedRef.current) {
+      pdfRenderedRef.current = true;
       renderPdf(pdfUrl);
-    } else {
-      console.error("PDF URL is missing!");
     }
 
     return () => {
