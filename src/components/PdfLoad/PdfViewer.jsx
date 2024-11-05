@@ -22,11 +22,11 @@ const PdfViewer = () => {
 
     return new Promise((resolve) => {
       img.onload = () => {
-        const scaleFactor = 0.5; // Измените на нужный коэффициент
+        const scaleFactor = 1; // Измените на нужный коэффициент
         canvas.width = img.width * scaleFactor;
         canvas.height = img.height * scaleFactor;
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", 0.7)); // Установите качество, например, 0.7
+        resolve(canvas.toDataURL("image/jpeg", 0.8)); // Установите качество, например, 0.7
       };
     });
   };

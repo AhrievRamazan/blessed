@@ -5,9 +5,11 @@
     justify-content: center;
     padding: 16px;
     z-index: 999;
+    padding-top: 10rem;
+  
   }
   
-  .pdf-container canvas{
-    margin-top: 6rem;
+  .pdf-container img{
+    object-fit: cover;
     width: 60vw;
   }
