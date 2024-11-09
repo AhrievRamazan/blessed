@@ -1,7 +1,7 @@
 // PdfViewer.jsx
 import React, { useEffect, useRef, useState } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
 import "./Pdf.scss";
 
@@ -9,27 +9,10 @@ GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs
 
 const PdfViewer = () => {
   const { title } = useParams();
-  const pdfUrl = new URLSearchParams(window.location.search).get("pdfUrl");
+  const location = useLocation();
+  const pdfUrl = location.state?.pdfUrl;
   const pdfRenderedRef = useRef(false);
-  const [images, setImages] = useState([]); // Для хранения изображений
-
-  const compressImage = (imgDataUrl) => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    const img = new Image();
-    img.src = imgDataUrl;
-
-    return new Promise((resolve) => {
-      img.onload = () => {
-        const scaleFactor = 1; // Измените на нужный коэффициент
-        canvas.width = img.width * scaleFactor;
-        canvas.height = img.height * scaleFactor;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", 0.8)); // Установите качество, например, 0.7
-      };
-    });
-  };
+  const [images, setImages] = useState([]);
 
   const renderPdf = async (url) => {
     if (!url) {
@@ -37,53 +20,63 @@ const PdfViewer = () => {
       return;
     }
 
-    const loadingTask = pdfjsLib.getDocument(url);
-    const pdf = await loadingTask.promise;
-    const numPages = pdf.numPages;
+    try {
+      const loadingTask = pdfjsLib.getDocument(url);
+      const pdf = await loadingTask.promise;
+      const numPages = pdf.numPages;
+      const pageImages = [];
 
-    const pageImages = [];
+      for (let i = 1; i <= numPages; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.0 });
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
 
-    for (let i = 1; i <= numPages; i++) {
-      const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: 1.0 });
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+        await page.render({ canvasContext: context, viewport }).promise;
 
-      await page.render({ canvasContext: context, viewport }).promise;
+        const imgDataUrl = canvas.toDataURL();
+        pageImages.push(imgDataUrl);
+      }
 
-      // Получаем изображение из canvas
-      const imgDataUrl = canvas.toDataURL();
-      console.log(`Page ${i} Image Data URL:`, imgDataUrl);
-
-      // Уменьшаем изображение
-      const compressedImgDataUrl = await compressImage(imgDataUrl);
-      pageImages.push(compressedImgDataUrl);
+      setImages(pageImages);
+    } catch (error) {
+      console.error("Ошибка при рендеринге PDF:", error);
     }
-
-    setImages(pageImages);
   };
 
   useEffect(() => {
     document.title = decodeURIComponent(title);
 
-    if (!pdfRenderedRef.current) {
+    if (!pdfRenderedRef.current && pdfUrl) {
       pdfRenderedRef.current = true;
       renderPdf(pdfUrl);
     }
 
+    // Очистка изображений при выходе из компонента
     return () => {
-      setImages([]); // Очистка изображений при размонтировании
+      setImages([]);
     };
   }, [pdfUrl, title]);
 
+  useEffect(() => {
+    if (images.length > 0) {
+      // Прокручиваем страницу наверх, когда все страницы загружены
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [images]);
+
   return (
     <div className="pdf-container">
-      {images.map((imgSrc, index) => (
-        <img key={index} src={imgSrc} alt={`Page ${index + 1}`} />
-      ))}
+      {images.length > 0 ? (
+        images.map((imgSrc, index) => (
+          <img key={index} src={imgSrc} alt={`Page ${index + 1}`} />
+        ))
+      ) : (
+        <p>Загрузка презентации, если она грузит слишком долго значит что-то сломалось.</p>
+      )}
     </div>
   );
 };

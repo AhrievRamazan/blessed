@@ -29,7 +29,7 @@ const Navbar = () => {
       </div>
 
       <ul className="app__navbar-links">
-        {["Главная", "Услуги", "Работы", "Обо мне", "Контакты"].map((item) => (
+        {["Главная", "Услуги", "Портфолио", "Обо мне", "Контакты"].map((item) => (
           <li className="app__flex p-text" key={`link-${item}`}>
             <a  onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
           </li>

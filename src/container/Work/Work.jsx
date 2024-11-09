@@ -39,7 +39,7 @@ const Work = () => {
 
   const handleOpenPdfOrImage = (pdfUrl, imgUrl, title) => {
     if (pdfUrl) {
-      navigate(`/${encodeURIComponent(title)}?pdfUrl=${encodeURIComponent(pdfUrl)}`);
+      navigate(`/${encodeURIComponent(title)}`, { state: { pdfUrl } });
     } else if (imgUrl) {
       window.open(imgUrl, "_blank");
     } else {
@@ -55,7 +55,7 @@ const Work = () => {
         Моё <span>Портфолио</span>
       </h2>
       <div className="app__work-filter">
-        {["Постеры", "Баннеры", "Товарные карточки", "Логотипы", "Визитки", "Все"].map((item, index) => (
+        {["Постеры", "Баннеры", "Товарные карточки", "Логотипы", "Полиграфия", "Все"].map((item, index) => (
           <div
             key={index}
             onClick={() => handleWorkFilter(item)}
@@ -127,4 +127,4 @@ const Work = () => {
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "Работы", "app__primarybg");
+export default AppWrap(MotionWrap(Work, "app__works"), "Портфолио", "app__primarybg");

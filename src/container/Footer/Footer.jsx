@@ -91,9 +91,6 @@ const Footer = () => {
           />
         </div>
         <div className="submit__button">
-          <div className="order">
-            <div className="truck"></div>
-          </div>
         </div>
       </div>
     </>
