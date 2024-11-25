@@ -44,7 +44,7 @@ const Navbar = () => {
             >
             <HiX onClick={() => setToggle(false)} />
             <ul>
-              {["Главная", "Услуги", "Работы", "Обо мне", "Контакты"].map((item) => (
+              {["Главная", "Услуги", "Портфолио", "Обо мне", "Контакты"].map((item) => (
                 <li key={item}>
                   <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
                 </li>
