@@ -58,12 +58,8 @@ const Footer = () => {
         </div>
       </div>
 
+    
       {/* <div className="app__footer-form app__flex">
-        <div class="contact-container">
-          <form></form>
-        </div>
-      </div> */}
-      <div className="app__footer-form app__flex">
         <div className="app__flex">
           <input
             className="p-text"
@@ -165,7 +161,7 @@ const Footer = () => {
             </symbol>
           </svg>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
