@@ -12,7 +12,7 @@ export const AppWrap = (Component, idName, className) =>
 
           <div className="copyright">
             <p className="p-text">@{year} Badiev</p>
-            <p className="p-text">Все права зашищены</p>
+            <p className="p-text">Все права защищены</p>
           </div>
         </div>
 

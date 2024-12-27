@@ -64,11 +64,11 @@ const About = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, type: "tween" }}
               
-              whileHover={{
-                scale: screenWidth > 768 
-                  ? activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1 
-                : 1,
-              }}
+              // whileHover={{
+              //   scale: screenWidth > 768 
+              //     ? activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1 
+              //   : 1,
+              // }}
               className="app__profile-item"
               style={{ backgroundImage: `url(${urlFor(about.imgUrl)})` }}
               key={about.title + index}
