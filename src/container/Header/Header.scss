@@ -179,6 +179,12 @@ h1 {
     min-height: 100%;
     overflow: hidden;
     clip-path: circle(50% at 50% 50%); /* Ограничивает область отображения круга */
+
+    @media screen and (max-width: 500px) {
+      min-width: 100%;
+      left: -7%;
+    }
+
     .overlay_circle {
       position: absolute;
       top: 50%;
@@ -192,7 +198,7 @@ h1 {
       @media screen and (max-width: 1200px) {
         width: 100%;
       }
-
+    
       @keyframes rot {
         0% {
           transform: translate(-50%, -50%) rotate(0deg); /* Добавляем translate для сохранения центрирования при анимации */
