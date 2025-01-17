@@ -6,7 +6,7 @@ const SocialMedia = () => {
   return (
     <div className="app__social">
       <div>
-        <a href="https://www.instagram.com/islam_badievv/" target="_blank">
+        <a href="https://www.instagram.com/badievv.ai?igsh=djdreG5vbThkMGs3&utm_source=qr" target="_blank">
           <AiFillInstagram />
         </a>
       </div>

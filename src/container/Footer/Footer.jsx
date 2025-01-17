@@ -48,12 +48,12 @@ const Footer = () => {
         <div className="app__footer-card">
           <img src={images.instagram} alt="instagram" />
           <a
-            href="https://www.instagram.com/islam_badievv/"
+            href="https://www.instagram.com/badievv.ai?igsh=djdreG5vbThkMGs3&utm_source=qr"
             className="p-text"
             target="_blank"
             rel="noreferrer"
           >
-            islam.badiev1
+            badievv.ai
           </a>
         </div>
       </div>
