@@ -20,6 +20,7 @@ const About = () => {
 
 
   const formatTitle = (title) => {
+    if (!title || typeof title !== "string") return "";
     const words = title.split(" ");
     if (words.length >= 2) {
       return words.map((word, index) => (
@@ -31,6 +32,7 @@ const About = () => {
     }
     return title;
   };
+  
 
   useEffect(() => {
     const query = '*[_type == "abouts"]'; // Запрос на получение данных
