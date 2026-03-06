@@ -20,19 +20,6 @@ const About = () => {
   };
 
 
-  const formatTitle = (title) => {
-    if (!title || typeof title !== "string") return "";
-    const words = title.split(" ");
-    if (words.length >= 2) {
-      return words.map((word, index) => (
-        <span key={index}>
-          {word}
-          {index < words.length - 1 && <br />}
-        </span>
-      ));
-    }
-    return title;
-  };
 
 
   useEffect(() => {
@@ -99,7 +86,7 @@ const About = () => {
                       <div className="content">
 
                         <button onClick={() => handleClick(index)}>
-                          <img src={images.arrowDown} />
+                          <img src={images.arrowDown} alt="arrowDown"/>
                         </button>
                       </div>
                     </article>
@@ -151,7 +138,7 @@ const AnimateHeightContent = ({ isActive, about, handleClick, screenWidth }) => 
             <div className="content">
 
               <button onClick={handleClick}>
-                <img src={images.arrowDown} />
+                <img src={images.arrowDown} alt="arrowDown"/>
               </button>
             </div>
           </article>

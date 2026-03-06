@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Contact } from "../container";
 
-const AboutPage = () => {
+const ContactPage = () => {
   useEffect(() => {
     document.title = "Обо мне | Бадиев Ислам";
   }, []);
@@ -9,4 +9,4 @@ const AboutPage = () => {
   return <Contact />;
 };
 
-export default Contact;
+export default ContactPage;

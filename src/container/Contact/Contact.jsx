@@ -11,11 +11,11 @@ const Contact = () => {
                 <div className="contact__content">
                     <h1><span> Спасибо,</span> Что <br />посмотрели</h1>
                     <div className="social__content">
-                        <img src={images.contactInfo} />
+                        <img src={images.contactInfo} alt="contactInfo" />
                     </div>
                 </div>
                 <div className="contact__logo">
-                    <img src={images.contactLogo}/>
+                    <img src={images.contactLogo} alt="contactLogo"/>
                 </div>
             </div>
         </>

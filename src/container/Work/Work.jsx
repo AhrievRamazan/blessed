@@ -15,7 +15,6 @@ const Work = () => {
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
   const [showMore, setShowMore] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const query = '*[_type == "works"]{..., pdfFile{asset->{_id, url}}}';
@@ -58,7 +57,7 @@ const Work = () => {
     <>
       <div className="portfolio__bg">
         <h2 className="badiev-text">
-          <img src={images.badievText}></img>
+          <img src={images.badievText} alt="badievText"></img>
         </h2>
         <Copyright />
       </div>
