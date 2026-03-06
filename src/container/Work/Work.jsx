@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { Copyright } from "../../components";
 import { urlFor, client } from "../../client";
-import { useNavigate } from "react-router-dom";
 import "./Work.scss";
 import { images } from "../../constants";
 
@@ -83,12 +82,15 @@ const Work = () => {
         >
           {visibleWorks.map((work, index) => (
             <div className="app__work-item app__flex" key={index}>
-              <a
+              <button
+                type="button"
                 className="app__work-img app__flex"
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  handleOpenPdfOrImage(work.pdfFile?.asset?.url, urlFor(work.imgUrl), work.title);
+                onClick={() => {
+                  handleOpenPdfOrImage(
+                    work.pdfFile?.asset?.url,
+                    urlFor(work.imgUrl),
+                    work.title
+                  );
                 }}
               >
                 <img src={urlFor(work.imgUrl)} alt={work.title} />
@@ -111,7 +113,7 @@ const Work = () => {
                     <AiFillEye />
                   </motion.div>
                 </motion.div>
-              </a>
+              </button>
 
               <div className="app__work-content app__flex">
                 <h4 className="bold-text">{work.title}</h4>
