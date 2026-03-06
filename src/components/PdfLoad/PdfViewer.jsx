@@ -1,16 +1,20 @@
 // PdfViewer.jsx
 import React, { useEffect, useRef, useState } from "react";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useSearchParams } from "react-router-dom";
 import { GlobalWorkerOptions } from "pdfjs-dist/webpack";
 import "./Pdf.scss";
 
 GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const PdfViewer = () => {
-  const { title } = useParams();
-  const location = useLocation();
-  const pdfUrl = location.state?.pdfUrl;
+const { title } = useParams();
+const location = useLocation();
+const [searchParams] = useSearchParams();
+
+const statePdfUrl = location.state?.pdfUrl;
+const queryPdfUrl = searchParams.get("pdfUrl");
+const pdfUrl = statePdfUrl || (queryPdfUrl ? decodeURIComponent(queryPdfUrl) : null);
   const pdfRenderedRef = useRef(false);
   const [images, setImages] = useState([]);
 

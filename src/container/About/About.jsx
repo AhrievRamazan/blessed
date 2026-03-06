@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./About.scss";
 import { urlFor, client } from "../../client";
+import { images } from "../../constants";
+import { Copyright } from "../../components";
 
 const About = () => {
   const [abouts, setAbouts] = useState([]); // Храним данные об элементах
@@ -32,7 +33,7 @@ const About = () => {
     }
     return title;
   };
-  
+
 
   useEffect(() => {
     const query = '*[_type == "abouts"]'; // Запрос на получение данных
@@ -45,74 +46,77 @@ const About = () => {
     return () => {
       window.removeEventListener("resize", updateScreenWidth);
     };
-    
+
   }, []);
 
   return (
     <>
-      <h2 className="head-text">
-       Мои <span>Услуги</span>
-      </h2>
+
       <div className="about__me">
-        <div className="about__item">
-          <div></div>
-        </div>
+        <article className="about__item">
+          <h1>
+            Услуги Дизайна
+          </h1>
+          <p>Я беру задачу на себя, от анализа до реализации.<br/>Вы получаете готовый результат без лишних хлопот.</p>
+        </article>
+        <Copyright/>
       </div>
-      <div className="app__profiles">
-        {abouts
-          .sort((a, b) => a.id - b.id) // Сортируем элементы
-          .map((about, index) => (
-            <motion.div
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5, type: "tween" }}
-              
-              // whileHover={{
-              //   scale: screenWidth > 768 
-              //     ? activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1 
-              //   : 1,
-              // }}
-              className="app__profile-item"
-              style={{ backgroundImage: `url(${urlFor(about.imgUrl)})` }}
-              key={about.title + index}
-            >
-              <div className="vissible__hidden">
-                <div className="pattern">
-                  {about.imgPattern && (
-                    <img src={urlFor(about.imgPattern)} alt="Pattern" />
-                  )}
+      <div className="app__price">
+
+
+        <div className="app__profiles">
+          {abouts
+            .sort((a, b) => a.id - b.id) // Сортируем элементы
+            .map((about, index) => (
+              <motion.div
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5, type: "tween" }}
+
+                // whileHover={{
+                //   scale: screenWidth > 768 
+                //     ? activeIndex === index ? 1 : activeIndex !== null ? 1.1 : 1.1 
+                //   : 1,
+                // }}
+                className="app__profile-item"
+                style={{ backgroundImage: `url(${urlFor(about.imgUrl)})` }}
+                key={about.title + index}
+              >
+                <div className="vissible__hidden">
+                  <div className="pattern">
+                    {about.imgPattern && (
+                      <img src={urlFor(about.imgPattern)} alt="Pattern" />
+                    )}
+                  </div>
+
+                  {/* Проверяем, является ли текущий элемент активным */}
+                  <div
+                    style={{
+                      visibility: activeIndex === index ? "hidden" : "visible",
+                    }}
+                  >
+
+                    <article>
+                      <div className="content">
+
+                        <button onClick={() => handleClick(index)}>
+                          <img src={images.arrowDown} />
+                        </button>
+                      </div>
+                    </article>
+                  </div>
                 </div>
 
-                {/* Проверяем, является ли текущий элемент активным */}
-                <div
-                  style={{
-                    visibility:  activeIndex === index ? "hidden" : "visible",
-                  }}
-                >
-                  <h2 className="bold-text" style={{ marginTop: 20 }}>
-                    {formatTitle(about.title)}
-                  </h2>
+                <AnimateHeightContent
+                  isActive={activeIndex === index}
+                  about={about}
+                  handleClick={() => handleClick(index)}
+                  screenWidth={screenWidth}
+                />
+              </motion.div>
+            ))}
 
-                  <article>
-                    <div className="content">
-                      <p className="p-text" style={{ marginTop: 10 }}>
-                        {about.description}
-                      </p>
-                      <button onClick={() => handleClick(index)}>
-                        <FaArrowDown />
-                      </button>
-                    </div>
-                  </article>
-                </div>
-              </div>
-
-              <AnimateHeightContent
-                isActive={activeIndex === index}
-                about={about}
-                handleClick={() => handleClick(index)}
-                screenWidth={screenWidth}
-              />
-            </motion.div>
-          ))}
+        </div>
+        <Copyright />
       </div>
     </>
   );
@@ -126,16 +130,16 @@ const AnimateHeightContent = ({ isActive, about, handleClick, screenWidth }) => 
     <motion.div
       className="description"
       initial={false} // Анимация только на изменение
-      animate=  {{
+      animate={{
         height: isActive ? contentRef.current?.scrollHeight : 0,
         opacity: isActive ? 1 : 0,
       }}
-      transition=  {{  duration: screenWidth > 768 ? 0.8 : 0, ease: "easeInOut" }} // Длительность анимации
-      style={{ overflow: "hidden",}} // Скрываем контент, когда он закрыт
+      transition={{ duration: screenWidth > 768 ? 0.8 : 0, ease: "easeInOut" }} // Длительность анимации
+      style={{ overflow: "hidden", }} // Скрываем контент, когда он закрыт
     >
       <div ref={contentRef}>
         <div className="description__title">
-          <h2 style={{marginTop: 10}}>{about.title}</h2>
+          <h2 style={{ marginTop: 10 }}>{about.title}</h2>
           <ul>
             {about.tags.map((desc, index) => (
               <li key={`${desc.id} - ${index}`}>
@@ -145,11 +149,9 @@ const AnimateHeightContent = ({ isActive, about, handleClick, screenWidth }) => 
           </ul>
           <article>
             <div className="content">
-              <p className="p-text" style={{ marginTop: 10 }}>
-                {about.description}
-              </p>
+
               <button onClick={handleClick}>
-                <FaArrowUp />
+                <img src={images.arrowDown} />
               </button>
             </div>
           </article>
@@ -161,6 +163,5 @@ const AnimateHeightContent = ({ isActive, about, handleClick, screenWidth }) => 
 
 export default AppWrap(
   MotionWrap(About, "app__about"),
-  "Услуги",
-  "app__whitebg"
+  "Услуги"
 );

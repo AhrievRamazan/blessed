@@ -1,59 +1,118 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { useNavigate } from "react-router-dom"; // Для перенаправления на главную
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { images } from "../../constants";
 import "./Navbar.scss";
 
+const navItems = [
+  { name: "Услуги", path: "/about" },
+  { name: "Портфолио", path: "/" },
+  { name: "Контакты", path: "/contact" },
+];
+{
+  navItems.map((item) => (
+    <li key={item.name}>
+      <NavLink
+        to={item.path}
+        end={item.path === "/"}
+        className={({ isActive }) =>
+          isActive ? "nav-link active" : "nav-link"
+        }
+      >
+        {item.name}
+      </NavLink>
+    </li>
+  ))
+}
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const navigate = useNavigate(); // Хук для навигации
+  const navigate = useNavigate();
 
-  // Функция для перехода на главную и скролла к нужному разделу
-  const handleNavigation = (section) => {
-    navigate("/"); // Перенаправляем на главную
-    setTimeout(() => {
-      // Делаем плавную прокрутку к нужному разделу после перенаправления
-      const element = document.getElementById(section);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        setToggle(false)
-      }
-    }, 100); // Задержка, чтобы дождаться перезагрузки главной страницы
+  const handleLogoClick = () => {
+    navigate("/");
+    setToggle(false);
+  };
+
+  const closeMobileMenu = () => {
+    setToggle(false);
   };
 
   return (
-    <nav className="app__navbar">
-      <div className="app__navbar-logo">
-        <img src={images.badievLogo} alt="logo" onClick={() => handleNavigation("Главная")} />
-      </div>
+    <header>
+      <nav className="app__navbar">
+        <div className="app__navbar-logo">
+          <img
+            src={images.badievLogo}
+            alt="Badiev logo"
+            onClick={handleLogoClick}
+          />
+        </div>
 
-      <ul className="app__navbar-links">
-        {["Главная", "Услуги", "Портфолио", "Обо мне", "Контакты"].map((item) => (
-          <li className="app__flex p-text" key={`link-${item}`}>
-            <a  onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
-          </li>
-        ))}
-      </ul>
+        <ul className="app__navbar-links">
+          {navItems.map((item) => (
+            <li className="app__flex p-text" key={item.name}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-      <div className="app__navbar-menu">
-        <HiMenuAlt4 onClick={() => setToggle(true)} />
+        <div className="app__navbar-menu">
+          <HiMenuAlt4 onClick={() => setToggle(true)} />
 
-        {toggle && (
-          <div
-            >
-            <HiX onClick={() => setToggle(false)} />
-            <ul>
-              {["Главная", "Услуги", "Портфолио", "Обо мне", "Контакты"].map((item) => (
-                <li key={item}>
-                  <a onClick={() => handleNavigation(item)}>{item}</a> {/* Перенаправляем и прокручиваем */}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </nav>
+          {toggle && (
+            <div className="app__navbar-menu_container">
+              <HiX onClick={() => setToggle(false)} />
+              <ul>
+                {navItems.map((item) => (
+                  <li key={item.name}>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        isActive ? "nav-link active" : "nav-link"
+                      }
+                      onClick={closeMobileMenu}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div className="social__links">
+          <ul>
+            <li>
+              <a href="https://t.me/your_username" target="_blank" rel="noreferrer">
+                <img src={images.telegram} className="social__icon" alt="Telegram" />
+              </a>
+            </li>
+            <li>
+              <a href="https://instagram.com/your_username" target="_blank" rel="noreferrer">
+                <img src={images.instagram} className="social__icon" alt="Instagram" />
+              </a>
+            </li>
+            <li>
+              <a href="https://youtube.com/@your_channel" target="_blank" rel="noreferrer">
+                <img src={images.youtube} className="social__icon" alt="YouTube" />
+              </a>
+            </li>
+            <li>
+              <img src={images.badievMiniLogo} className="mini__logo" alt="Mini logo" />
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
   );
 };
 

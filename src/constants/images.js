@@ -1,35 +1,25 @@
-import email from '../assets/email.png';
-import mobile from '../assets/mobile.png';
-import AI from '../assets/AI.png';
-import AP from '../assets/AP.png';
-import ID from '../assets/ID.png';
-import profile2 from '../assets/profile2.png';
-import pattern1 from '../assets/pattern1.png';
-import pattern2 from '../assets/pattern2.png';
-import expLogo from '../assets/exp-logo.png';
-import blob from '../assets/blob.png';
+
 import logo2 from '../assets/logo.svg';
 import badievLogo from '../assets/badiev-logo.png';
-import palestine from '../assets/palestine.png';
-import instagram from '../assets/instagram.jpg';
+import badievText from '../assets/badievv-text.png';
+import instagram from '../assets/instagram.png';
 import telegram from '../assets/telegram.png';
-
+import youtube from '../assets/youtube.png';
+import badievMiniLogo from '../assets/badiev-minilogo.png';
+import arrowDown from '../assets/arrow-down.png';
+import contactLogo from '../assets/contact-logo.png';
+import contactInfo from '../assets/Contact-information.png';
 const images = {
-  blob,
-  pattern1,
-  pattern2,
-  email,
-  mobile,
-  profile2,
-  logo2,
   badievLogo,
+  logo2,
+  badievText,
   instagram,
   telegram,
-  AI,
-  AP,
-  ID,
-  palestine,
-  expLogo,
+  youtube,
+  badievMiniLogo,
+  arrowDown,
+  contactLogo,
+  contactInfo,
 };
 
 export default images;

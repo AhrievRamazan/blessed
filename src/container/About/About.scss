@@ -5,6 +5,35 @@
   margin-top: 5rem;
 }
 
+.about__me {
+  position: relative;
+  background: url('../../assets/price-bg.png')center center no-repeat;
+  height: 100vh;
+  width: calc(100% + 4rem);
+  background-size: 2500px 1600px;
+  top: -100px;
+  display: flex;
+  align-items: center;
+
+  .about__item {
+    margin-left: 100px;
+    text-transform: uppercase;
+
+    h1 {
+      color: white;
+      font-size: 13rem;
+      font-weight: 400;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: #6B6B6B;
+    }
+  }
+}
+
 .app__profiles {
   display: flex;
   justify-content: center;
@@ -14,56 +43,97 @@
   gap: 2vw;
   max-width: 88.542vw;
   width: 100%;
+  margin-bottom: 230px;
+
+  @media screen and (max-width: 1400px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    margin-bottom: 130px;
+
+  }
+
   @media screen and (max-width: 862px) {
     max-width: 100%;
     width: 100%;
+  }
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(1, 1fr);
+
   }
 }
 
 .app__profile-item {
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   width: 28vw;
   height: 17vw;
   position: relative;
-  @media screen and (max-width: 862px) {
-    max-width: 250px;
-    width: 100%;
-    height: 150px;
+
+
+  @media screen and (max-width: 1400px) {
+    width: 600px;
+    height: 370px;
+    margin-bottom: 40px;
   }
-  @media screen and (max-width: 600px) {
-    max-width: 450px;
+
+  @media screen and (max-width: 1250px) {
+    width: 500px;
+    height: 300px;
+  }
+
+  @media screen and (max-width: 1050px) {
+    width: 400px;
     height: 250px;
   }
-  @media screen and (max-width: 450px) {
-    height: 210px;
-  }
-  @media screen and (max-width: 370px) {
-    height: 190px;
+
+  @media screen and (max-width: 862px) {
+    width: 330px;
+    height: 200px;
   }
 
+  @media screen and (max-width: 862px) {
+    width: 330px;
+    height: 200px;
+  }
+
+  @media screen and (max-width: 340px) {
+    width: 300px;
+    height: 180px;
+  }
 
   .description {
+    button {
+      transform: rotate(180deg);
+      bottom: 10px !important;
+      right: 30px !important;
+    }
+
     position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: var(--primary-color);
+    background: #171717;
+    color: white;
     z-index: 999;
     top: calc(100% - 6px);
     box-shadow: 0px 4px 12px 2px rgba(0, 0, 0, 0.12),
-      /* тень снизу */ 4px 0px 12px 2px rgba(0, 0, 0, 0.12),
-      /* тень справа */ -4px 0px 12px 2px rgba(0, 0, 0, 0.12); /* тень слева */
+    4px 0px 12px 2px rgba(0, 0, 0, 0.12),
+    -4px 0px 12px 2px rgba(0, 0, 0, 0.12);
+
 
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+
     &.active .description {
       top: 0; // Плавно поднимается, когда элемент активен
     }
+
     .description__title {
       z-index: 999;
       margin-top: 2rem;
@@ -73,34 +143,39 @@
       }
 
       ul {
-        margin: 4rem 0 3rem 3rem;
+        margin: 0 0 0 1rem;
         padding: 5px 5px 5px 2rem;
 
         @media screen and (max-width: 862px) {
-         margin-left: 1rem;
+          margin-left: 1rem;
         }
+
         li::marker {
           font-size: 1.5rem;
-          color: var(--secondary-color);
+          color: #92b772;
+
         }
+
         li {
           margin-bottom: 10px;
         }
+
         p {
           font-size: 1rem;
         }
       }
     }
   }
+
   .vissible__hidden {
-    overflow: hidden;
     height: 100%;
     width: 100%;
     position: relative;
   }
 
   &:hover .pattern img {
-    animation: rot 30s linear infinite; /* Запуск анимации при наведении */
+    animation: rot 30s linear infinite;
+    /* Запуск анимации при наведении */
   }
 
   .pattern {
@@ -112,19 +187,25 @@
     z-index: 0;
 
     img {
-      position: absolute; /* Позиционирование для центрирования */
+      position: absolute;
+      /* Позиционирование для центрирования */
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); /* Центрирование изображения */
-      transition: transform 0.5s; /* Плавный переход */
+      transform: translate(-50%, -50%);
+      /* Центрирование изображения */
+      transition: transform 0.5s;
+      /* Плавный переход */
     }
 
     @keyframes rot {
       0% {
-        transform: translate(-50%, -50%) rotate(0deg); /* Начальная позиция */
+        transform: translate(-50%, -50%) rotate(0deg);
+        /* Начальная позиция */
       }
+
       100% {
-        transform: translate(-50%, -50%) rotate(360deg); /* Конечная позиция */
+        transform: translate(-50%, -50%) rotate(360deg);
+        /* Конечная позиция */
       }
     }
   }
@@ -140,8 +221,9 @@
 
     @media screen and (max-width: 862px) {
       font-size: 1rem;
-    
+
     }
+
     @media screen and (max-width: 1600px) {
       top: 0;
       left: 10px;
@@ -152,50 +234,62 @@
     z-index: 1;
     display: flex;
     padding: 20px;
-    position: absolute;
     bottom: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
+
     @media screen and (max-width: 862px) {
       padding: 10px;
     }
-    p,
+
     button {
       box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.12);
+      background: transparent;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 9.82vw;
-      height: 2.91vw;
+
+      border: 2px solid #4F4F4F;
       border-radius: 5rem;
-      background-color: var(--primary-color);
+
       font-size: 1.1vw;
       color: var(--black-color);
-      z-index: 999;
-      margin: 0 !important;
+      z-index: 998;
 
-      @media screen and (max-width: 862px) {
-        width: 100px;
-        height: 30px;
-        font-size: 0.8rem;
-      }
+      margin: 0 !important;
+      padding: 10px;
+
+      position: absolute;
+
+
+
     }
 
     button {
-      border: none;
-      width: 3vw;
+      width: 70px;
+      bottom: -30px;
+      right: 60px;
       cursor: pointer;
+
+      @media screen and (min-width: 2000px) {
+        bottom: -40px;
+        right: 80px;
+        width: 90px;
+      }
+
       @media screen and (max-width: 862px) {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
+        bottom: -20px;
+        right: 40px;
       }
     }
   }
 
   img {
     width: 100%;
-    height: 220px;
     object-fit: contain;
   }
 }
