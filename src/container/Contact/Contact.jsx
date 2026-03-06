@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import "./Contact.scss";
-import { urlFor, client } from "../../client";
 import { images } from "../../constants";
-import { Copyright } from "../../components";
 
 const Contact = () => {
 
